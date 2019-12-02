@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.edu.smsys.dao.mapper.UserEntityMapper">
+
+    <!--结果集映射-->
+    <resultMap id="user" type="UserEntity">
+        <!--主键-->
+        <id property="id" column="id"/>
+        <!--其他属性-->
+        <result property="userCode" column="user_code"/>
+        <result property="userPassword" column="user_password"/>
+        <result property="role" column="role"/>
+        <result property="valid" column="valid"/>
+    </resultMap>
+    <!--实体sql-->
+    <sql id="user_columns">
+       `id`,
+       `user_code`,
+       `user_password`,
+       `role`,
+       `valid`
+    </sql>
+    <!--没有主键的sql片段-->
+    <sql id="noid_user_columns">
+       `user_code`,
+       `user_password`,
+       `role`,
+       `valid`
+    </sql>
+
+    <select id="queryUserByCodeAndPassword" parameterType="string" resultMap="user">
+        SELECT <include refid="user_columns"/> FROM t_sys_user WHERE user_code=#{userCode} AND user_password=#{userPassword} AND valid=1;
+    </select>
+
+    <!--默认添加用户的角色是学生 不能使用需要管理员进行授权之后才能开通账号-->
+    <insert id="insertUser" parameterType="userEntity" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO `t_sys_user` (<include refid="noid_user_columns"/>) VALUES ( #{userCode},#{userPassword}, 3, 0)
+    </insert>
+
+    <update id="updateUserById" parameterType="userEntity">
+
+    </update>
+
+</mapper>
