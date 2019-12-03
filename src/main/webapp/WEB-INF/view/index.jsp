@@ -7,15 +7,6 @@
 
 </head>
 <body>
-    <table class="table table-striped">
-        <c:if test="${not empty accounts}">
-            <c:forEach items="${accounts}" var="account" varStatus="status">
-                <tr>
-                    <td>${account.account_name}</td>
-                    <td>${account.account_password}</td>
-                </tr>
-            </c:forEach>
-        </c:if>
-    </table>
+
 </body>
 </html>

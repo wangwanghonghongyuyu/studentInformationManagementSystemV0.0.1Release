@@ -25,13 +25,13 @@
                 <div class="pull-right inline-block">
                     <!--用户通知-->
                             <div class="user-notice" style="position: relative">
-                                <a href="">
+                                <a href="${pageContext.request.contextPath}/index/exit">
                                     <span class="glyphicon glyphicon-list-alt"></span>
                                 </a>
                             </div>
                             <!--退出-->
                             <div class="user-exit pull-right">
-                                <a href="">
+                                <a href="${pageContext.request.contextPath}/index/exit">
                                     <span class="glyphicon glyphicon-log-out"></span>
                                     <span >|</span>
                                     <span >退出</span>
@@ -62,13 +62,28 @@
                 <!--菜单下拉-->
                 <div id="menu">
                     <h3><span class="iconfont icon-zhuye"></span> 主页</h3>
-                    <div>
-                         <a href="">学生管理学生管理</a>
+                    <div class="index">
+                         <a href="">主页</a>
                     </div>
+
                     <h3><span class="iconfont icon-xueshengguanli"></span> 学生管理</h3>
-                    <div>
-                        <a href="">学生管理学生管理</a>
+                    <div class="studen-manager">
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                                <a href="">学生信息</a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="">学生成绩信息</a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="">学生在校情况信息</a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="">学生职业规划</a>
+                            </li>
+                        </ul>
                     </div>
+
                     <h3><span class="iconfont icon-laoshiguanli"/> 老师管理</h3>
                     <div>
                         <p>Nam enim risus, molestie et, porta ac, aliquam ac, risus. Quisque lobortis. Phasellus pellentesque purus in massa. Aenean in pede. Phasellus ac libero ac tellus pellentesque semper. Sed ac felis. Sed commodo, magna quis lacinia ornare, quam ante aliquam nisi, eu iaculis leo purus venenatis dui. </p>

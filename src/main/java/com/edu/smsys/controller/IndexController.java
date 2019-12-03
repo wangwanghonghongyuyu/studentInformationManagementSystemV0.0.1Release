@@ -23,4 +23,11 @@ public class IndexController extends BaseController{
         model.addAttribute("user",user);//将session中的用户信息传递到主页的上面
         return VIEW_CONTENT+"index";
     }
+
+    @RequestMapping("/exit")
+    public String exit(HttpServletRequest request){
+        HttpSession session =request.getSession();
+        session.removeAttribute("user");//获得session中的用户
+        return "redirect:/login";
+    }
 }
