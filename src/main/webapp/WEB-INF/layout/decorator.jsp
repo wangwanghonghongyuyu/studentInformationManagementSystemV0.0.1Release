@@ -17,7 +17,27 @@
         <body class="over-flow-hidden">
             <!--头部-->
             <div class="myui-header">
+            <%--glyphicon glyphicon-comment--%>
+                 <!--实时时间-->
+                <div id="date" class="inline-block">
 
+                </div>
+                <div class="pull-right inline-block">
+                    <!--用户通知-->
+                            <div class="user-notice" style="position: relative">
+                                <a href="">
+                                    <span class="glyphicon glyphicon-list-alt"></span>
+                                </a>
+                            </div>
+                            <!--退出-->
+                            <div class="user-exit pull-right">
+                                <a href="">
+                                    <span class="glyphicon glyphicon-log-out"></span>
+                                    <span >|</span>
+                                    <span >退出</span>
+                                </a>
+                            </div>
+                  </div>
             </div>
             <!--菜单-->
             <div class="myui-menu">
@@ -25,10 +45,18 @@
                    <h1><span>学生信息管理</span></h1>
                 </div>
                 <div class="user-info">
-                    <div class="user-img">
+                    <div class="user-img" <c:if test="${not empty user}"> style="background: url('${pageContext.request.contextPath}${user.portraitURL}')  no-repeat;background-size: 100% auto" </c:if> >
+                         <%--<c:if test="${not empty user}"> style="background: url('${pageContext.request.contextPath}${user.portraitURL}')  no-repeat;background-size: 100% auto"
+                                判断 如果user对象不是空那么执行里面的代码：style="background: url('${pageContext.request.contextPath}${user.portraitURL}')  no-repeat;background-size: 100% auto"
+                                上面的意思相当于 style="background: url('/studentInfoSys/static/load/img/portrait/default.jpg')  no-repeat;background-size: 100% auto"
+                                给div设置背景图片 这个背景图就是头像 不平埔 然后设置图片大小 宽度 ：100% 高度：自适应
+                         --%>
                     </div>
                     <div class="user-message">
-
+                          <c:if test="${not empty user}">
+                              <span class="glyphicon glyphicon-user"></span>
+                              <span>帐号：${ user.userCode}</span>
+                          </c:if>
                     </div>
                 </div>
                 <!--菜单下拉-->
@@ -86,9 +114,10 @@
             </div>
 
             </div>
+
         <script src="${pageContext.request.contextPath}/static/core/modularization/jquery/jquery.js"></script>
         <script src="${pageContext.request.contextPath}/static/core/modularization/jquery-ui/jquery-ui.js"></script>
         <script src="${pageContext.request.contextPath}/static/core/modularization/bootstrap-3/js/bootstrap.js"></script>
         <script src="${pageContext.request.contextPath}/static/core/js/javascript.js"></script>
-        </body>
-        </html>
+    </body>
+ </html>

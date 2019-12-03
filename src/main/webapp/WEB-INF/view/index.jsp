@@ -4,6 +4,7 @@
 <html>
 <head>
     <title>中小学信息管理系统</title>
+
 </head>
 <body>
     <table class="table table-striped">

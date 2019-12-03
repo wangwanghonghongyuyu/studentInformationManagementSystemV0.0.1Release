@@ -35,16 +35,16 @@ public class UserController extends BaseController{
      */
     @RequestMapping("/login.do")
     public String loginAction(HttpServletRequest request,Model model){
-        String userCode=request.getParameter("user-code");
-        String userPassword=request.getParameter("user-password");
-        UserEntity user =userService.login(userCode,userPassword);
+        String userCode=request.getParameter("user-code");//获取帐号
+        String userPassword=request.getParameter("user-password");//获取密码
+        UserEntity user =userService.login(userCode,userPassword);//登陆验证逻辑
         if (user!=null){
-            HttpSession session =request.getSession();
+            HttpSession session =request.getSession();//获得Session
             session.setAttribute("user",user);//登录之后存到session中
-            return VIEW_CONTENT+"index";
+            return "redirect:/index";//重定向到主页API上
         }
         model.addAttribute("msg","登录失败 账号密码错误");
-        return "redirect:/login";
+        return "redirect:/login";//重定向到返回API上
     }
 
     /**
@@ -55,8 +55,8 @@ public class UserController extends BaseController{
      */
     @RequestMapping("/register")
     public String register(HttpServletRequest request,Model model){
-        String userCode=request.getParameter("user-code");
-        String userPassword=request.getParameter("user-password");
+        String userCode=request.getParameter("user-code");//获取帐号
+        String userPassword=request.getParameter("user-password");//获取密码
         int status=userService.register(userCode,userPassword);//注册
         if (status!=0){
             model.addAttribute("msg","注册成功 请登录");
