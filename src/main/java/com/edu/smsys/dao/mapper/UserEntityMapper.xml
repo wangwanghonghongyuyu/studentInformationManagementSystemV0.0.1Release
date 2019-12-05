@@ -14,6 +14,7 @@
         <result property="role" column="role"/>
         <result property="portraitURL" column="portrait_img"/>
         <result property="valid" column="valid"/>
+        <result property="studentId" column="student_id"/>
     </resultMap>
 
     <!--实体sql-->
@@ -23,7 +24,8 @@
         `user_password`,
         `role`,
         `portrait_img`,
-        `valid`
+        `valid`,
+        `student_id`
     </sql>
 
     <!--没有主键的sql片段-->
@@ -31,7 +33,8 @@
         `user_code`,
         `user_password`,
         `role`,
-        `valid`
+        `valid`，
+        `student_id`
     </sql>
 
     <select id="queryUserByCodeAndPassword" parameterType="string" resultMap="user">

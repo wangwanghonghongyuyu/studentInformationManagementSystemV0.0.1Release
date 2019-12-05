@@ -212,9 +212,10 @@ body {
     left: 18%;
     top: 0px;
     width: 82% !important;
-    height: 5%;
+    height: 50px;
     background: #FFFFFF;
     border-bottom: #eeeeee 2px solid;
+    z-index: 9999   ;
 }
 
 .myui-menu {
@@ -253,7 +254,9 @@ body {
     height: 700px;
     margin: 50px auto;
 }
-
+#menu a{
+    text-decoration: none;
+}
 #menu .ui-state-default {
     background: #4E5465;
     border: 0px;
@@ -292,6 +295,7 @@ body {
 }
 .user-notice{
     display: inline-block;
+    margin-right: 80px;
 }
 .user-notice .glyphicon-list-alt{
     font-size: 25px;
@@ -300,9 +304,6 @@ body {
     line-height: 4rem;
 }
 
-.user-notice{
-    margin-right: 15px;
-}
 #date{
     line-height: 4rem;
     width: 526px;
@@ -311,9 +312,24 @@ body {
 .inline-block{
     display: inline-block;
 }
-
-.user-notice-details{
-    z-index: 100;
-    }
-
+.studen-manager .list-group-item{
+    border: none;
+}
+.studen-manager .list-group-item a{
+    text-decoration: none;
+}
+.user-notice .dropdown-menu{
+    left: -280px;
+}
+.user-notice .dropdown-menu{
+    width: 300px;
+    height: 500px;
+}
+.dashboard{
+    width: 2000px;
+    height: 800px;
+    background: #ffffff;
+    margin: 30px auto 0px auto;
+    box-shadow:10px 10px 5px #BDBCBC;
+}
 

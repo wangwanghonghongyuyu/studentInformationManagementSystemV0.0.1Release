@@ -1,7 +1,7 @@
-    <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-        <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-        <html lang="zh-CN">
-        <head>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<html lang="zh-CN">
+   <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -13,22 +13,24 @@
         <sitemesh:write property='title'/>
         </title>
         <sitemesh:write property='head'/>
-        </head>
-        <body class="over-flow-hidden">
+   </head>
+   <body class="over-flow-hidden">
             <!--头部-->
             <div class="myui-header">
             <%--glyphicon glyphicon-comment--%>
                  <!--实时时间-->
-                <div id="date" class="inline-block">
-
-                </div>
+                <div id="date" class="inline-block"> </div>
                 <div class="pull-right inline-block">
                     <!--用户通知-->
-                            <div class="user-notice" style="position: relative">
-                                <a href="${pageContext.request.contextPath}/index/exit">
+                            <div class="user-notice dropdown ">
+                                <a href="${pageContext.request.contextPath}/index/exit" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <span class="glyphicon glyphicon-list-alt"></span>
                                 </a>
+                                <div class="dropdown-menu">
+
+                                </div>
                             </div>
+
                             <!--退出-->
                             <div class="user-exit pull-right">
                                 <a href="${pageContext.request.contextPath}/index/exit">
