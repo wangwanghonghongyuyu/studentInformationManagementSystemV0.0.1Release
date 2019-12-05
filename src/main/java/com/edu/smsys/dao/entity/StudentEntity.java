@@ -18,4 +18,6 @@ public class StudentEntity {
     private String name;
     private int valid;
     private int age;
+    private int classId;
+    private int enrolId;
 }
