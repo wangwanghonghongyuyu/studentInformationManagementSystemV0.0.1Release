@@ -13,6 +13,7 @@
     <!--若springmvc中只扫描controller,则需要加上service,和dao的扫描功能-->
     <context:component-scan base-package="com.edu.smsys.service"/>
     <context:component-scan base-package="com.edu.smsys.dao"/>
+    <context:component-scan base-package="com.edu.smsys.controller"/>
     <context:property-placeholder location="classpath:database.properties"/>
     <bean id="dataSource"  class="org.apache.commons.dbcp.BasicDataSource"  destroy-method="close" scope="singleton">
         <property name="driverClassName" value="${driver}" />
@@ -30,12 +31,22 @@
     <!--配置sqlSessionFactory-->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
-        <property name="configLocation" value="classpath:mybatis-cfg.xml"/>
+        <!--<property name="configLocation" value="classpath:mybatis-cfg.xml"/>-->
+        <!-- 显式指定Mapper文件位置 -->
+        <property name="configLocation"  value="classpath:/mybatis-cfg.xml"/>
+        <!-- 通配符指定Mapper.xml -->
+        <property name="mapperLocations" value="classpath*:mybatis/**/*Mapper.xml" />
+        <!-- 自动扫描entity目录, 省掉Configuration.xml里的手工配置 -->
+        <property name="typeAliasesPackage" value="com.edu.smsys.dao.entity" />
+    </bean>
+    <bean id="sqlSessionMain" class="org.mybatis.spring.SqlSessionTemplate">
+        <constructor-arg index="0" ref="sqlSessionFactory"/>
     </bean>
     <!--扫描映射文件(mapper动态代理)-->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="basePackage"  value="com.edu.smsys.dao.mapper"/>
     </bean>
+
     <!-- 配置事务管理器 -->
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="dataSource"/>

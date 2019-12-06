@@ -78,8 +78,6 @@ public class UserService {
      * @return  1 2 3 4 5 6 个数
      */
     public int countUserCode(String userCode){
-        List<UserEntity> userEntityList=userMapper.queryUserByCode(userCode);
-        if (userEntityList!=null)return userEntityList.size();
-        return 0;
+        return userMapper.queryUserByCode(userCode);
     }
 }

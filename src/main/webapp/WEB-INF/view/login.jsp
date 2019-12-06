@@ -139,17 +139,20 @@
           <form action="${pageContext.request.contextPath}/register" id="registerform" class="cmxform"  method="post">
               <div class="form-group">
                 账号：<input class="form-control input-lg user-code"  name="user-code" type="text" onblur="isExistence()"  placeholder="请输入用户名"style="font-size: 16px" value="201912010001">
-                    <sapn class="register-prompt">
-
-                    </sapn>
+                    <sapn class="register-prompt" style="color: red;"></sapn>
               </div>
               <div class="form-group">
                 密码：<input  class="form-control input-lg"  name="user-password" type="password"  placeholder="请输入密码" style="font-size: 16px"value="123456">
               </div>
               <div class="form-group">
-                  密码：<input  class="form-control input-lg"  name="user-password" type="password"  placeholder="请输入密码" style="font-size: 16px"value="123456">
+                 绑定学生对象：
+                <select>
+                  <option>1</option>
+                  <option>1</option>
+                  <option>1</option>
+                  <option>1</option>
+                </select>
               </div>
-
           </form>
         </div>
         <div class="modal-footer">
@@ -168,15 +171,18 @@
      */
     function isExistence(){
         var userCode=$("#registerform .user-code").val();
-        console.log(userCode);
+        //console.log(userCode);
         $.ajax({
             url:_baselocation+"/is-existence",
             type: 'post',
             contentType: 'application/json; charset=UTF-8',
-            data: JSON.stringify(userCode),
+            data: userCode,//一定不能给转成json字符串传过去 结果会是这样""201922101411""
+            dataType:"json",
             success: function (result) {
                 if (result!=null||result!=""){
-                    $(".register-prompt").val(result);//将后台请求到的“该用户已经注册”添加到元素中
+                    $(".register-prompt").text(result);//将后台请求到的“该用户已经注册”添加到元素中
+                }else {
+                    $(".register-prompt").text("");//清空
                 }
             },
             error: function (XMLHttpRequest, textStatus, errorThrown) {

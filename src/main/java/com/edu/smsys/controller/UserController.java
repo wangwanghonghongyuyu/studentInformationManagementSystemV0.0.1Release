@@ -1,5 +1,6 @@
 package com.edu.smsys.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.edu.smsys.dao.entity.UserEntity;
 import com.edu.smsys.service.impl.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -78,6 +79,6 @@ public class UserController extends BaseController{
     @RequestMapping("/is-existence")
     @ResponseBody
     public String isExistence(@RequestBody String userCode){
-        return userService.isExistence(userCode);
+        return toJsonStr(userService.isExistence(userCode));//转换成JSON字符串
     }
 }

@@ -8,7 +8,6 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
 		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd">
-
     <!--需要扫描的包,注意,若spring配置文件 中不配置相关包的扫描功能,则此处只到com.edu,否则会报错:错误的创建bean-->
     <context:component-scan base-package="com.edu.smsys.controller"/>
     <!--配置json字符集编码格式-->
@@ -26,11 +25,6 @@
                     <list>
                         <value>text/html;charset=UTF-8</value>
                         <value>application/json</value>
-                    </list>
-                </property>
-                <property name="features">
-                    <list>
-                        <value>WriteDateUseDateFormat</value>
                     </list>
                 </property>
             </bean>

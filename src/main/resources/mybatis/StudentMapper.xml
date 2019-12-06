@@ -20,15 +20,6 @@
         limit #{pageEntity.offsetPara,jdbcType=INTEGER} ,#{pageEntity.limitPara,jdbcType=INTEGER}
     </sql>
 
-    <sql id="like_left">
-        concat('%',
-    </sql>
-
-    <sql id="like_right">
-        ,'%')
-    </sql>
-
-
     <sql id="studnet_columns">
         `id`,
         `census_id`,
