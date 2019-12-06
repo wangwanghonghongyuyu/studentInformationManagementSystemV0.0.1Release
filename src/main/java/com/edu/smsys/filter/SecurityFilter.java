@@ -10,16 +10,33 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
+/**
+ * 自己写的用户权限过滤器  为了防止乱访问页面
+ */
 @Slf4j
 public class SecurityFilter extends HttpServlet implements Filter {
 
     private FilterConfig config;
+
+    /**
+     * 从初始化方法中获取在web.xml中配置的参数
+     * @param filterConfig
+     * @throws ServletException
+     */
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
         config=filterConfig;
         log.info("权限验证过滤器初始化...");
     }
 
+    /**
+     * 主要的权限验证逻辑都在这个方法里
+     * @param servletRequest 从网页传递过来的请求
+     * @param servletResponse 从网页传递过来的响应
+     * @param filterChain 要往下继续传递用到的对象
+     * @throws IOException
+     * @throws ServletException
+     */
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest request=(HttpServletRequest)servletRequest;//获得请求

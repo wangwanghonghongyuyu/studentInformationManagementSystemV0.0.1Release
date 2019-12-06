@@ -1,6 +1,5 @@
 package com.edu.smsys.controller;
 
-import com.alibaba.fastjson.JSON;
 import com.edu.smsys.dao.entity.UserEntity;
 import com.edu.smsys.service.impl.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +13,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+/**
+ * 用户前端请求控制层
+ */
 @Controller
 public class UserController extends BaseController{
 

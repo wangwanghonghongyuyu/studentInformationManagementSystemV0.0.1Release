@@ -6,8 +6,9 @@ import com.edu.smsys.util.Constant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
+/**
+ * 用户信息处理业务逻辑层
+ */
 @Service
 public class UserService {
     @Autowired

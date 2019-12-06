@@ -2,6 +2,10 @@ package com.edu.smsys.dao.mapper;
 
 import com.edu.smsys.dao.entity.UserEntity;
 import org.apache.ibatis.annotations.Param;
+
+/**
+ * 用户数据库映射器
+ */
 public interface UserEntityMapper {
     /**
      * 查询用户根据账号和密码

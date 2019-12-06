@@ -2,6 +2,9 @@ package com.edu.smsys.dao.entity;
 
 import lombok.Data;
 
+/**
+ * 废弃 测试用的
+ */
 @Data
 public class Account {
    /* `id` tinyint(20) NOT NULL AUTO_INCREMENT,

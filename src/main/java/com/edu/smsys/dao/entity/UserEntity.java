@@ -2,6 +2,9 @@ package com.edu.smsys.dao.entity;
 
 import lombok.Data;
 
+/**
+ * 用户实体类
+ */
 @Data
 public class UserEntity {
     private int id;

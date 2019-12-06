@@ -6,6 +6,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/static/core/modularization/bootstrap-3/css/bootstrap.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/static/core/modularization/bootstrap-select/dist/css/bootstrap-select.css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/static/core/modularization/jquery-ui/jquery-ui.css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/static/img/icon/iconfont.css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/static/core/css/style.css">
@@ -138,6 +139,8 @@
         <script src="${pageContext.request.contextPath}/static/core/modularization/jquery/jquery.js"></script>
         <script src="${pageContext.request.contextPath}/static/core/modularization/jquery-ui/jquery-ui.js"></script>
         <script src="${pageContext.request.contextPath}/static/core/modularization/bootstrap-3/js/bootstrap.js"></script>
+        <script src="${pageContext.request.contextPath}/static/core/modularization/bootstrap-select/dist/js/bootstrap-select.js"></script>
+        <script src="${pageContext.request.contextPath}/static/core/modularization/bootstrap-select/dist/js/i18n/defaults-zh_CN.js"></script>
         <script src="${pageContext.request.contextPath}/static/core/js/javascript.js"></script>
     </body>
  </html>

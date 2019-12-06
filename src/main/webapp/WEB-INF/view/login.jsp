@@ -145,12 +145,38 @@
                 密码：<input  class="form-control input-lg"  name="user-password" type="password"  placeholder="请输入密码" style="font-size: 16px"value="123456">
               </div>
               <div class="form-group">
-                 绑定学生对象：
-                <select>
-                  <option>1</option>
-                  <option>1</option>
-                  <option>1</option>
-                  <option>1</option>
+                选择年级：
+                <select class="selectpicker">
+                  <option>一年级</option>
+                  <option>二年级</option>
+                  <option>三年级</option>
+                  <option>四年级</option>
+                  <option>五年级</option>
+                  <option>六年级</option>
+                  <option>初一</option>
+                  <option>初二</option>
+                  <option>初三</option>
+                </select>
+                  选择班级：
+                <select class="selectpicker">
+                  <option>一班</option>
+                  <option>二班</option>
+                  <option>三班</option>
+                  <option>四班</option>
+                  <option>五班</option>
+                  <option>六班</option>
+                </select>
+                选择姓名：
+                <select class="selectpicker">
+                  <option>tom</option>
+                  <option>jack</option>
+                  <option>张三</option>
+                  <option>王大</option>
+                  <option>翠花</option>
+                  <option>狗蛋</option>
+                  <option>李四</option>
+                  <option>赵六</option>
+                  <option>王二麻子</option>
                 </select>
               </div>
           </form>

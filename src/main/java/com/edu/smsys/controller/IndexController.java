@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+/**
+ * 首页和一些网站操作的请求处理控制层
+ */
 @Controller
 @RequestMapping("/index")
 public class IndexController extends BaseController{
