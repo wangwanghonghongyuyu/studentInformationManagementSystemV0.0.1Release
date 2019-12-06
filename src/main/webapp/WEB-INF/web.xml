@@ -91,7 +91,8 @@
     <filter-class>com.edu.smsys.filter.SecurityFilter</filter-class>
     <init-param>
       <param-name>noLoginPaths</param-name>
-      <param-value>login.jsp;login;register;static</param-value>
+      <!--和登陆注册相关的请求都要配置到这个参数下，不然会拦截下来-->
+      <param-value>login.jsp;login;register;static;is-existence</param-value>
     </init-param>
     <init-param>
       <param-name>charset</param-name>

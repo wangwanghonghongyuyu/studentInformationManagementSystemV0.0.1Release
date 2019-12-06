@@ -14,6 +14,7 @@
     if (msg!=""){
       alert(msg);
     }
+    _baselocation='${pageContext.request.contextPath}';
     //提交注册
     function register(){
       $("#registerform").submit();
@@ -137,11 +138,18 @@
             <!--注册区-->
           <form action="${pageContext.request.contextPath}/register" id="registerform" class="cmxform"  method="post">
               <div class="form-group">
-                账号：<input class="form-control input-lg"  name="user-code" type="text"  placeholder="请输入用户名"style="font-size: 16px" value="201912010001">
+                账号：<input class="form-control input-lg user-code"  name="user-code" type="text" onblur="isExistence()"  placeholder="请输入用户名"style="font-size: 16px" value="201912010001">
+                    <sapn class="register-prompt">
+
+                    </sapn>
               </div>
               <div class="form-group">
                 密码：<input  class="form-control input-lg"  name="user-password" type="password"  placeholder="请输入密码" style="font-size: 16px"value="123456">
               </div>
+              <div class="form-group">
+                  密码：<input  class="form-control input-lg"  name="user-password" type="password"  placeholder="请输入密码" style="font-size: 16px"value="123456">
+              </div>
+
           </form>
         </div>
         <div class="modal-footer">
@@ -153,7 +161,30 @@
   </div><!-- /.modal -->
   <div style="color: white;font-size: 13px;font-weight: 100;position:fixed; bottom:10px; left:550px; font-size:14px; text-align:center;">Copyright 2019©</div>
 </div>
+<script type="text/javascript">
 
+    /**
+     * 注册用户是否存在
+     */
+    function isExistence(){
+        var userCode=$("#registerform .user-code").val();
+        console.log(userCode);
+        $.ajax({
+            url:_baselocation+"/is-existence",
+            type: 'post',
+            contentType: 'application/json; charset=UTF-8',
+            data: JSON.stringify(userCode),
+            success: function (result) {
+                if (result!=null||result!=""){
+                    $(".register-prompt").val(result);//将后台请求到的“该用户已经注册”添加到元素中
+                }
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                console.log(textStatus, errorThrown);
+            }
+        });
+    }
+</script>
 </body>
 
 </html>

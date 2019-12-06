@@ -3,9 +3,10 @@ package com.edu.smsys.service.impl;
 import com.edu.smsys.dao.entity.UserEntity;
 import com.edu.smsys.dao.mapper.UserEntityMapper;
 import com.edu.smsys.util.Constant;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class UserService {
@@ -56,5 +57,29 @@ public class UserService {
      */
     public int addUser(UserEntity userEntity){
         return userMapper.insertUser(userEntity);
+    }
+
+
+    /**
+     * 注册用户是否存在
+     * @param userCode
+     * @return true 不存在 false 存在
+     */
+    public String isExistence(String userCode){
+        if (countUserCode(userCode)>=1){
+            return "当前注册用户帐号已存在";
+        }
+        return null;
+    }
+
+    /**
+     * 统计用户名存在个数
+     * @param userCode
+     * @return  1 2 3 4 5 6 个数
+     */
+    public int countUserCode(String userCode){
+        List<UserEntity> userEntityList=userMapper.queryUserByCode(userCode);
+        if (userEntityList!=null)return userEntityList.size();
+        return 0;
     }
 }

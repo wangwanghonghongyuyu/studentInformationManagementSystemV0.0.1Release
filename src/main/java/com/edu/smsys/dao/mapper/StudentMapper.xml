@@ -15,6 +15,20 @@
         <result property="enrolId" column="enrol_id"></result>
     </resultMap>
 
+    <!-- mysql分页通用结尾 -->
+    <sql id="pageEnd">
+        limit #{pageEntity.offsetPara,jdbcType=INTEGER} ,#{pageEntity.limitPara,jdbcType=INTEGER}
+    </sql>
+
+    <sql id="like_left">
+        concat('%',
+    </sql>
+
+    <sql id="like_right">
+        ,'%')
+    </sql>
+
+
     <sql id="studnet_columns">
         `id`,
         `census_id`,
@@ -26,6 +40,30 @@
         `class_id`,
         `enrol_id`,
     </sql>
+
+    <sql id="studnet_property">
+        /*在数据插入的时候对学籍id进行非空判断如果为空的那就给一个默认值0*/
+        <choose>
+            <when test="censusId==0||censusId==''">
+                0,
+            </when>
+            <otherwise>
+                #{censusId},
+            </otherwise>
+        </choose>
+        #{telephone},
+        #{homeAddress},
+        #{name},
+        #{valid},
+        #{age},
+        #{classId},
+        #{enrolId}
+    </sql>
+
+    <select id="queryAllStudent" resultMap="studnet">
+        SELECT <include refid="studnet_columns" /> FROM t_sys_student;
+    </select>
+
 
 
 </mapper>

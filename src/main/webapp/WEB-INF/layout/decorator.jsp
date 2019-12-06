@@ -9,6 +9,9 @@
         <link rel="stylesheet" href="${pageContext.request.contextPath}/static/core/modularization/jquery-ui/jquery-ui.css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/static/img/icon/iconfont.css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/static/core/css/style.css">
+        <script type="text/javascript">
+           _baselocation='${pageContext.request.contextPath}';
+        </script>
         <title>
         <sitemesh:write property='title'/>
         </title>

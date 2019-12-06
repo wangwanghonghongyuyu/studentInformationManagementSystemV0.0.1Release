@@ -28,13 +28,23 @@
         `student_id`
     </sql>
 
-    <!--没有主键的sql片段-->
+    <!--没有主键的sql片段 对应sql-->
     <sql id="noid_user_columns">
-        `user_code`,
+        `user_code`
+        ,
         `user_password`,
         `role`,
-        `valid`，
+        `valid`,
         `student_id`
+    </sql>
+
+    <!--对应实体的参数传递-->
+    <sql id="user_property">
+        #{userCode},
+        #{userPassword},
+        3,
+        0,
+        #{studentId}
     </sql>
 
     <select id="queryUserByCodeAndPassword" parameterType="string" resultMap="user">
@@ -45,7 +55,7 @@
 
     <!--默认添加用户的角色是学生 不能使用需要管理员进行授权之后才能开通账号-->
     <insert id="insertUser" parameterType="userEntity" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO `t_sys_user` (<include refid="noid_user_columns"/>) VALUES ( #{userCode},#{userPassword}, 3, 0)
+        INSERT INTO `t_sys_user` (<include refid="noid_user_columns"/>) VALUES (<include refid="user_property"/>)
     </insert>
 
     <update id="updateUserById" parameterType="userEntity">
@@ -54,7 +64,15 @@
             `user_password`=#{userPassword},
             `role`=#{role},
             `portrait_img`=#{portraitURL},
-        WHERE `id` = #{id};
+            WHERE `id` = #{id};
     </update>
-
+    <!--根据用户名查询用户-->
+    <select id="queryUserByCode" parameterType="String" resultMap="user">
+        SELECT <include refid="user_columns"/>
+        FROM t_sys_user
+        WHERE
+              t_sys_user.user_code LIKE #{userCode}
+          AND
+              valid=1;
+    </select>
 </mapper>

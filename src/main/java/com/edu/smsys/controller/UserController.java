@@ -5,8 +5,10 @@ import com.edu.smsys.service.impl.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -66,4 +68,16 @@ public class UserController extends BaseController{
         return "redirect:/login";
     }
 
+    /**
+     * 忽略这个API的权限验证
+     * 这个API一定在自己定义的权限拦截总配置因为会拦截所有路径
+     * 异步检查注册的用户名是否存在
+     * @param userCode
+     * @return "当前注册用户帐号已存在"  或者  null
+     */
+    @RequestMapping("/is-existence")
+    @ResponseBody
+    public String isExistence(@RequestBody String userCode){
+        return userService.isExistence(userCode);
+    }
 }
