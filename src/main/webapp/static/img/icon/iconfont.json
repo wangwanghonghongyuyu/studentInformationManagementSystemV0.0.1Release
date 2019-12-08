@@ -20,6 +20,13 @@
       "unicode_decimal": 59086
     },
     {
+      "icon_id": "1013981",
+      "name": "家长",
+      "font_class": "jiachang",
+      "unicode": "e7ed",
+      "unicode_decimal": 59373
+    },
+    {
       "icon_id": "1440391",
       "name": "系统设置",
       "font_class": "xitongshezhi",

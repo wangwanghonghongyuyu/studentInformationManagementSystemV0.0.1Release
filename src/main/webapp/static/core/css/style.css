@@ -1,6 +1,7 @@
 
 .red {
     background: red;
+    height: 100%;
 }
 
 .testblock {
@@ -60,7 +61,7 @@ body {
 }
 
 #signupForm .input-lg {
-
+    background:  no-repeat;
 }
 
 .input-lg {
@@ -326,10 +327,63 @@ body {
     height: 500px;
 }
 .dashboard{
-    width: 2000px;
+    width: 1500px;
     height: 800px;
     background: #ffffff;
     margin: 30px auto 0px auto;
     box-shadow:10px 10px 5px #BDBCBC;
+}
+.padding-right-50{
+    padding-right: 50px;
+}
+.padding-left-50{
+    padding-left: 50px;
+}
+.padding-left-150{
+    padding-left: 150px;
+}
+.dashboard-title{
+    margin-top: 28px;
+}
+.dashboard-title span{
+    font-size: 30px;
+    margin-right: 10px;
+    color: #4E5465;
+}
+.count{
+    width: 300px;
+    height: 200px;
+    float: left;
+    margin-top: 80px;
+    margin-left: 60px;
+    border-radius: 10px;
+}
+.teacher-count{
+    background: #7ec521;
+}
+.student-count{
+    background:#fea261;
+}
+.parent-count{
+    background:#ffc007;
+}
+.login-userdetail{
+    margin-top: 35px;
+    margin-left: 59px;
+}
+.teacher-count .icon-yonghuguanli{
+    color: #ffffff;
+    font-size: 90px;
+    margin-left: 10px;
+}
+.student-count .icon-icon-test2{
+    color: #ffffff;
+    font-size: 90px;
+    margin-left: 10px;
+}
+.parent-count .icon-jiachang{
+    color: #ffffff;
+    font-size: 90px;
+    margin-left: 10px;
 }
 
