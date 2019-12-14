@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.Date;
 
 /**
  * 用户前端请求控制层
@@ -43,6 +44,7 @@ public class UserController extends BaseController{
         String userCode=request.getParameter("user-code");//获取帐号
         String userPassword=request.getParameter("user-password");//获取密码
         UserEntity user =userService.login(userCode,userPassword);//登陆验证逻辑
+        user.setLoginTime(new Date());//初始化登录日期
         if (user!=null){
             HttpSession session =request.getSession();//获得Session
             session.setAttribute("user",user);//登录之后存到session中

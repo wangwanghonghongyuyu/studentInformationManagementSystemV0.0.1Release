@@ -1,7 +1,9 @@
 package com.edu.smsys.service.impl;
 
+import com.edu.smsys.dao.entity.TeacherEntity;
 import com.edu.smsys.dao.entity.UserEntity;
 import com.edu.smsys.dao.mapper.UserEntityMapper;
+import com.edu.smsys.model.vo.IndexCountVO;
 import com.edu.smsys.util.Constant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,6 +13,12 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class UserService {
+    @Autowired
+    private ParentService parentService;
+    @Autowired
+    private StudentService studentService;
+    @Autowired
+    private TeacherService teacherService;
     @Autowired
     private UserEntityMapper userMapper;
 
@@ -80,5 +88,17 @@ public class UserService {
      */
     public int countUserCode(String userCode){
         return userMapper.queryUserByCode(userCode);
+    }
+
+    /**
+     * 显示首页上老师 学生 家长 统计个数
+     * @return
+     */
+    public IndexCountVO countIndexCount(){
+        IndexCountVO vo=new IndexCountVO();
+        vo.setParentCount(parentService.selectCount());
+        vo.setStudentCount(studentService.selectCount());
+        vo.setTeacherCount(teacherService.selectCount());
+        return vo;
     }
 }

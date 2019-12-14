@@ -50,11 +50,11 @@
         #{classId},
         #{enrolId}
     </sql>
-
     <select id="queryAllStudent" resultMap="studnet">
         SELECT <include refid="studnet_columns" /> FROM t_sys_student;
     </select>
-
-
-
+    <!--学生个数统计-->
+    <select id="selectCount" resultType="int">
+        select COUNT(*) AS counts FROM t_sys_student ;
+    </select>
 </mapper>

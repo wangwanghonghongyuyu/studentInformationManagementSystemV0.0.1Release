@@ -3,5 +3,27 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.edu.smsys.dao.mapper.ParentEntityMapper">
+    <resultMap id="parent" type="ParentEntity">
+        <!--主键-->
+        <id property="id" column="id"/>
+        <!--其他属性-->
+        <result property="parentName" column="parent_name"/>
+        <result property="type" column="type"/>
+        <result property="telephone" column="telephone"/>
+        <result property="workArea" column="work_area"/>
+        <result property="age" column="age"/>
+    </resultMap>
 
+    <sql id="parent_columns">
+         `id`,
+        `parent_name`,
+        `type`,
+        `telephone`,
+        `work_area`,
+        `age`,
+    </sql>
+    <!--家长个数统计-->
+    <select id="selectCount" resultType="int">
+        select COUNT(*) AS counts FROM t_sys_parent ;
+    </select>
 </mapper>

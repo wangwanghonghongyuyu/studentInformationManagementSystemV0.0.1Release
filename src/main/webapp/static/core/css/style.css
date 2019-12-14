@@ -360,12 +360,15 @@ body {
 }
 .teacher-count{
     background: #7ec521;
+    position: relative;
 }
 .student-count{
     background:#fea261;
+    position: relative;
 }
 .parent-count{
     background:#ffc007;
+    position: relative;
 }
 .login-userdetail{
     margin-top: 35px;
@@ -385,5 +388,33 @@ body {
     color: #ffffff;
     font-size: 90px;
     margin-left: 10px;
+}
+.count-number-title{
+    color: #ffffff;
+    display: inline-block;
+    position: absolute;
+    font-size: 20px;
+    left: 157px;
+    top: 10px;
+}
+.count-number-img{
+    color: #ffffff;
+    display: inline-block;
+    position: absolute;
+    left: 19px;
+    top: 19px;
+}
+.count-number{
+    color: #ffffff;
+    display: inline-block;
+    position: absolute;
+    font-size: 25px;
+    left: 178px;
+    top: 80px;
+}
+.login-userdetail .panel-default > .panel-heading {
+    color: #ffffff;
+    background-color: #6E3ABA;
+    border-color: #333;
 }
 

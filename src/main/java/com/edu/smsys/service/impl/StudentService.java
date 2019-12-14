@@ -52,4 +52,12 @@ public class StudentService {
     private void setStudentVo(StudentEntity source, StudentVO target) {
         //TODO 还要有届和班级还有学籍
     }
+
+    /**
+     * 统计学生个数
+     * @return
+     */
+    public int selectCount(){
+        return studentEntityMapper.selectCount();
+    }
 }

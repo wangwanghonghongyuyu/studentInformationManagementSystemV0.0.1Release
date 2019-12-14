@@ -13,4 +13,10 @@ public interface StudentEntityMapper {
      * @return
      */
     public List<StudentEntity> queryAllStudent();
+
+    /**
+     * 统计学生个数
+     * @return
+     */
+    public int selectCount();
 }
