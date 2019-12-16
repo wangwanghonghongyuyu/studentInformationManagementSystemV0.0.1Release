@@ -129,4 +129,24 @@ public class UserTest {
         log.debug("执行成功，影响记录行数为 {}", teacherEntityMapper.insertTeacher(entity));
     }
 
+    @Test
+    public void updateTeacher(){
+        TeacherEntity entity=new TeacherEntity();
+        entity.setTeacherAddress("辽宁省大连市旅顺口区大连外国语学院---旅顺校区");
+        entity.setUserId(1);
+        entity.setId(1);
+        log.debug("执行成功，影响记录行数为 {}", teacherEntityMapper.updateTeacherById(entity));
+    }
+
+    @Test
+    public void findTeachers(){
+        log.debug("查询所有信息 {}",JSON.toJSONString(teacherEntityMapper.queryTeaChers()));
+    }
+
+    @Test
+    public void findTeacherByTeacher(){
+        TeacherEntity entity=new TeacherEntity();
+        entity.setTeacherAddress("旅顺");
+        log.debug("查询所有班级信息 {}",JSON.toJSONString(teacherEntityMapper.queryTeacherByTeacher(entity)));
+    }
 }

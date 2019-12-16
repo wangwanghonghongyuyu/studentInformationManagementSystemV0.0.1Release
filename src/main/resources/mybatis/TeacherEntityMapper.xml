@@ -167,7 +167,7 @@
                 AND `teacher_salary` like #{teacherSalary}
             </if>
             <if test="teacherAddress != null">
-                AND `teacher_address` like #{teacherAddress}
+                AND `teacher_address` like <include refid="like_left"/>#{teacherAddress}<include refid="like_right"/>
             </if>
             <if test="userId != 0">
                 AND `user_id` like #{userId}
@@ -181,28 +181,28 @@
         UPDATE `t_sys_teacher`
         <trim prefix="set" suffixOverrides=",">
             <if test="teacherName != null">
-                AND `teacher_name` like <include refid="like_left"/>#{teacherName}<include refid="like_right"/>
+                 `teacher_name` = #{teacherName},
             </if>
             <if test="teacherCode != null">
-                AND `teacher_code` like #{teacherCode}
+                teacher_code` = #{teacherCode},
             </if>
             <if test="subjectId != 0">
-                AND `subject_id` like #{teacherCode}
+                 `subject_id` = #{teacherCode},
             </if>
             <if test="telephone != null">
-                AND `telephone` like #{telephone}
+                 `telephone` = #{telephone},
             </if>
             <if test="teacherStartTime != null">
-                AND `teacher_start_time` like #{teacherStartTime}
+                 `teacher_start_time` = #{teacherStartTime},
             </if>
             <if test="teacherSalary != 0">
-                AND `teacher_salary` like #{teacherSalary}
+                 `teacher_salary` = #{teacherSalary},
             </if>
             <if test="teacherAddress != null">
-                AND `teacher_address` like #{teacherAddress}
+                 `teacher_address` = #{teacherAddress},
             </if>
             <if test="userId != 0">
-                AND `user_id` like #{userId}
+                 `user_id` = #{userId},
             </if>
         </trim>
         WHERE `id` = #{id};
