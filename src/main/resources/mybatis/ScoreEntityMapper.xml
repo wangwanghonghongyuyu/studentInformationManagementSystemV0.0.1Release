@@ -4,4 +4,5 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.edu.smsys.dao.mapper.ScoreEntityMapper">
     <!--结果集映射 成绩实体类-->
+
 </mapper>

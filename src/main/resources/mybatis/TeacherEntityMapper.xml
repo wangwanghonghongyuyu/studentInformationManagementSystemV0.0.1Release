@@ -208,8 +208,7 @@
         WHERE `id` = #{id};
     </update>
 
-    <!--插入班级信息-->
-    <!--默认添加用户的角色是学生 不能使用需要管理员进行授权之后才能开通账号-->
+    <!--插入老师信息-->
     <insert id="insertTeacher" parameterType="teacherEntity" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO `t_sys_teacher` (<include refid="insert_columns_key"/>) VALUES (<include
             refid="insert_property_value"/>)

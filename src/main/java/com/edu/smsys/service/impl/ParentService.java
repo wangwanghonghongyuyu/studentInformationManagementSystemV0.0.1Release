@@ -25,33 +25,62 @@ public class ParentService implements BaseService<ParentEntity> {
         return parentEntityMapper.selectCount();
     }
 
+    /**
+     * 查询所有家长
+     * @return
+     */
     @Override
     public List<ParentEntity> findAll() {
-        return null;
+        return parentEntityMapper.queryParents();
     }
 
+    /**
+     * 查询老师根据老师id
+     * @param id
+     * @return
+     */
     @Override
     public ParentEntity findEntityById(int id) {
-        return null;
+        return parentEntityMapper.queryParentById(id);
     }
 
+    /**
+     * 查询家长根据家长
+     * @param entity
+     * @return
+     */
     @Override
     public List<ParentEntity> findEntity(ParentEntity entity) {
-        return null;
+        return parentEntityMapper.queryParentByParent(entity);
     }
 
+    /**
+     * 修改家长信息
+     * @param entity
+     * @return
+     */
     @Override
     public int updateEntity(ParentEntity entity) {
-        return 0;
+        return parentEntityMapper.updateParentsById(entity);
     }
 
+    /**
+     * 插入家长信息
+     * @param entity
+     * @return
+     */
     @Override
     public int addEntity(ParentEntity entity) {
-        return 0;
+        return parentEntityMapper.insertParent(entity);
     }
 
+    /**
+     * 删除家长根据id
+     * @param id
+     * @return
+     */
     @Override
     public int deleteEntity(int id) {
-        return 0;
+        return parentEntityMapper.deleteParentById(id);
     }
 }

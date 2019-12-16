@@ -1,10 +1,8 @@
 import com.alibaba.fastjson.JSON;
-import com.edu.smsys.dao.entity.ClassEntity;
-import com.edu.smsys.dao.entity.EnrolEntity;
-import com.edu.smsys.dao.entity.TeacherEntity;
-import com.edu.smsys.dao.entity.UserEntity;
+import com.edu.smsys.dao.entity.*;
 import com.edu.smsys.dao.mapper.ClassEntityMapper;
 import com.edu.smsys.dao.mapper.EnrolEntityMapper;
+import com.edu.smsys.dao.mapper.ParentEntityMapper;
 import com.edu.smsys.dao.mapper.TeacherEntityMapper;
 import com.edu.smsys.service.impl.UserService;
 import lombok.extern.slf4j.Slf4j;
@@ -29,6 +27,8 @@ public class UserTest {
     private ClassEntityMapper classEntityMapper;
     @Autowired
     private TeacherEntityMapper teacherEntityMapper;
+    @Autowired
+    private ParentEntityMapper parentEntityMapper;
     @Test
     public void login(){
         UserEntity user =userService.findUserByCodeAndPassword("201912010001","123456");
@@ -148,5 +148,16 @@ public class UserTest {
         TeacherEntity entity=new TeacherEntity();
         entity.setTeacherAddress("旅顺");
         log.debug("查询所有班级信息 {}",JSON.toJSONString(teacherEntityMapper.queryTeacherByTeacher(entity)));
+    }
+
+    @Test
+    public void addParent(){
+        ParentEntity entity=new ParentEntity();
+        entity.setAge(23);
+        entity.setParentName("王十三");
+        entity.setTelephone("1245152651747");
+        entity.setType(1);
+        entity.setWorkArea("辽宁大连");
+        parentEntityMapper.insertParent(entity);
     }
 }
