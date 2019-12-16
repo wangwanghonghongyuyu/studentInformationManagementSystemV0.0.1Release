@@ -3,6 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.edu.smsys.dao.mapper.ClassEntityMapper">
+    <!--2019年12月16日-->
     <!--年级实体映射-->
     <resultMap id="classes" type="ClassEntity">
         <id property="id" column="id"/>

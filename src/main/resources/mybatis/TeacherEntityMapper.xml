@@ -3,6 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.edu.smsys.dao.mapper.TeacherEntityMapper">
+    <!--2019年12月16日-->
     <!--结果集映射 老师实体类-->
     <resultMap id="teacher" type="TeacherEntity">
         <id property="id" column="id"/>
@@ -16,8 +17,18 @@
         <result property="userId" column="user_id"></result>
     </resultMap>
 
+    <!--模糊查询通配符连接-->
+    <sql id="like_left">
+        concat('%',
+    </sql>
+
+    <!--模糊查询通配符连接-->
+    <sql id="like_right">
+        ,'%')
+    </sql>
+
     <!--实体sql-->
-    <sql id="user_columns">
+    <sql id="teacher_columns">
         `id`,
         `teacher_name`,
         `teacher_code`,
@@ -25,12 +36,187 @@
         `telephone`,
         `teacher_start_time`,
         `teacher_salary`,
-         `teacher_address`,
-        `user_id`,
+        `teacher_address`,
+        `user_id`
+    </sql>
+
+    <!--插入的动态sql 对空值进行处理 key-->
+    <sql id="insert_columns_key">
+        <trim suffixOverrides=",">
+            <if test="id!=0 ">
+                `id`,
+            </if>
+            <if test="teacherName!=null and teacherName!=''">
+                `teacher_name`,
+            </if>
+            <if test="teacherCode!=null and teacherCode!=''">
+                `teacher_code`,
+            </if>
+            <if test="subjectId!=0">
+                `subject_id`,
+            </if>
+            <if test="telephone!=null and telephone!=''">
+                `telephone`,
+            </if>
+            <if test="teacherStartTime!=null and teacherStartTime!=''">
+                `teacher_start_time`,
+            </if>
+            <if test="teacherSalary!=null and teacherSalary!=''">
+                `teacher_salary`,
+            </if>
+            <if test="teacherAddress!=null and teacherAddress!=''">
+                `teacher_address`,
+            </if>
+            <if test="userId!=0">
+                `user_id`,
+            </if>
+        </trim>
+    </sql>
+
+    <!--插入的动态sql 对空值进行处理 value-->
+    <sql id="insert_property_value">
+        <trim suffixOverrides=",">
+            <if test="id!=0 ">
+                #{id},
+            </if>
+            <if test="teacherName!=null and teacherName!=''">
+                #{teacherName},
+            </if>
+            <if test="teacherCode!=null and teacherCode!=''">
+                #{teacherCode},
+            </if>
+            <if test="subjectId!=0">
+                #{subjectId},
+            </if>
+            <if test="telephone!=null and telephone!=''">
+                #{telephone},
+            </if>
+            <if test="teacherStartTime!=null and teacherStartTime!=''">
+                #{teacherStartTime},
+            </if>
+            <if test="teacherSalary!=null and teacherSalary!=''">
+                #{teacherSalary},
+            </if>
+            <if test="teacherAddress!=null and teacherAddress!=''">
+                #{teacherAddress},
+            </if>
+            <if test="userId!=0">
+                #{userId}
+            </if>
+        </trim>
+    </sql>
+
+    <!--注入参数多次复用 备用-->
+    <sql id="class_property">
+        #{id},
+        #{teacherName},
+        #{teacherCode},
+        #{subjectId},
+        #{telephone},
+        #{teacherStartTime},
+        #{teacherSalary},
+        #{teacherAddress},
+        #{userId}
     </sql>
 
     <!--老师个数统计-->
     <select id="selectCount" resultType="int">
         select COUNT(*) AS counts FROM t_sys_teacher ;
     </select>
+
+    <!--查询所有所有老师-->
+    <select id="queryTeaChers" resultMap="classes">
+        SELECT
+        <include refid="teacher_columns"/>
+        FROM t_sys_teacher;
+    </select>
+
+    <!--查询老师根据老师id-->
+    <select id="queryTeaCherById" parameterType="int" resultMap="teacher">
+        SELECT
+        <include refid="teacher_columns"/>
+        FROM t_sys_teacher WHERE `id`=#{id};
+    </select>
+
+    <!--查询老师根据老师实体 返回一个list-->
+    <!--trim 动态查询 如果因为AND 不能直接在where后面-->
+    <select id="queryTeacherByTeacher" parameterType="teacherEntity" resultMap="teacher">
+        SELECT
+        <include refid="teacher_columns"/>
+        FROM t_sys_teacher
+        <trim prefix="WHERE" prefixOverrides="AND">
+            <if test="id != 0">
+                `id` = #{id}
+            </if>
+            <if test="teacherName != null">
+                AND `teacher_name` like <include refid="like_left"/>#{teacherName}<include refid="like_right"/>
+            </if>
+            <if test="teacherCode != null">
+                AND `teacher_code` like #{teacherCode}
+            </if>
+            <if test="subjectId != 0">
+                AND `subject_id` like #{teacherCode}
+            </if>
+            <if test="telephone != null">
+                AND `telephone` like #{telephone}
+            </if>
+            <if test="teacherStartTime != null">
+                AND `teacher_start_time` like #{teacherStartTime}
+            </if>
+            <if test="teacherSalary != 0">
+                AND `teacher_salary` like #{teacherSalary}
+            </if>
+            <if test="teacherAddress != null">
+                AND `teacher_address` like #{teacherAddress}
+            </if>
+            <if test="userId != 0">
+                AND `user_id` like #{userId}
+            </if>
+        </trim>
+    </select>
+
+    <!--修改老师信息-->
+    <!--这时就需要进行动态SQL拼接，如下，使用trim就是为了删掉最后字段的“,”。主要不用单独写SET了，因为set被包含在trim中了-->
+    <update id="updateTeacherById" parameterType="teacherEntity">
+        UPDATE `t_sys_teacher`
+        <trim prefix="set" suffixOverrides=",">
+            <if test="teacherName != null">
+                AND `teacher_name` like <include refid="like_left"/>#{teacherName}<include refid="like_right"/>
+            </if>
+            <if test="teacherCode != null">
+                AND `teacher_code` like #{teacherCode}
+            </if>
+            <if test="subjectId != 0">
+                AND `subject_id` like #{teacherCode}
+            </if>
+            <if test="telephone != null">
+                AND `telephone` like #{telephone}
+            </if>
+            <if test="teacherStartTime != null">
+                AND `teacher_start_time` like #{teacherStartTime}
+            </if>
+            <if test="teacherSalary != 0">
+                AND `teacher_salary` like #{teacherSalary}
+            </if>
+            <if test="teacherAddress != null">
+                AND `teacher_address` like #{teacherAddress}
+            </if>
+            <if test="userId != 0">
+                AND `user_id` like #{userId}
+            </if>
+        </trim>
+        WHERE `id` = #{id};
+    </update>
+
+    <!--插入班级信息-->
+    <!--默认添加用户的角色是学生 不能使用需要管理员进行授权之后才能开通账号-->
+    <insert id="insertTeacher" parameterType="teacherEntity" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO `t_sys_teacher` (<include refid="insert_columns_key"/>) VALUES (<include
+            refid="insert_property_value"/>)
+    </insert>
+
+    <!--删除老师根据id-->
+    <delete id="deleteTeacherById" parameterType="int">
+       DELETE FROM `t_sys_teacher` WHERE `id`=#{id}
+    </delete>
 </mapper>

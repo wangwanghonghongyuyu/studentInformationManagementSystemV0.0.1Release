@@ -10,6 +10,9 @@ import org.springframework.stereotype.Service;
 
 /**
  * 用户信息处理业务逻辑层
+ * 2019年12月16日
+ * 没继承共通类
+ * 原因在我想起共通之间写的 由于前后台逻辑已经都实现了所以不想动了
  */
 @Service
 public class UserService {

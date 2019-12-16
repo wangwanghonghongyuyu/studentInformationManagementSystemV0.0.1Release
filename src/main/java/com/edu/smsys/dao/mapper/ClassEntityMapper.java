@@ -7,6 +7,7 @@ import java.util.List;
 
 /**
  * 班映射器
+ * 2019年12月16日
  */
 public interface ClassEntityMapper {
     /**
@@ -44,7 +45,7 @@ public interface ClassEntityMapper {
     public int insertClass(ClassEntity classEntity);
 
     /**
-     * 删除年级根据id
+     * 删除班级根据id
      * @param id
      * @return
      */

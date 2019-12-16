@@ -3,6 +3,7 @@ package com.edu.smsys.service.impl;
 import com.edu.smsys.dao.entity.StudentEntity;
 import com.edu.smsys.dao.mapper.StudentEntityMapper;
 import com.edu.smsys.model.vo.StudentVO;
+import com.edu.smsys.service.BaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,9 +12,10 @@ import java.util.List;
 
 /**
  * 学生信息处理业务逻辑层
+ * 2019年12月16日
  */
 @Service
-public class StudentService {
+public class StudentService implements BaseService<StudentEntity> {
 
     //注入学生表的映射器获取数据库中的信息
     @Autowired
@@ -59,5 +61,35 @@ public class StudentService {
      */
     public int selectCount(){
         return studentEntityMapper.selectCount();
+    }
+
+    @Override
+    public List<StudentEntity> findAll() {
+        return null;
+    }
+
+    @Override
+    public StudentEntity findEntityById(int id) {
+        return null;
+    }
+
+    @Override
+    public List<StudentEntity> findEntity(StudentEntity entity) {
+        return null;
+    }
+
+    @Override
+    public int updateEntity(StudentEntity entity) {
+        return 0;
+    }
+
+    @Override
+    public int addEntity(StudentEntity entity) {
+        return 0;
+    }
+
+    @Override
+    public int deleteEntity(int id) {
+        return 0;
     }
 }

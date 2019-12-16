@@ -40,7 +40,7 @@ public interface EnrolEntityMapper {
     public  int updateEnrolById(EnrolEntity enrolEntity);
 
     /**
-     * 插入学生信息
+     * 插入年级信息
      * @param enrolEntity
      * @return
      */
