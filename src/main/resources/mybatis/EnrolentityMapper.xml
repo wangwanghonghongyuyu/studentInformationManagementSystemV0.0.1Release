@@ -3,5 +3,145 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.edu.smsys.dao.mapper.EnrolEntityMapper">
+    <!--年级实体映射-->
+    <resultMap id="enrol" type="EnrolEntity">
+        <id property="id" column="id"/>
+        <result property="enrolName" column="enrol_name"></result>
+        <result property="enrolContent" column="enrol_content"></result>
+        <result property="enrolCount" column="enrol_count"></result>
+        <result property="enrolCode" column="enrol_code"></result>
+    </resultMap>
 
+    <!--sql 目的为了多次复用-->
+    <sql id="enrol_columns">
+         `id`,
+        `enrol_name`,
+        `enrol_content`,
+        `enrol_count`,
+        `enrol_code`
+    </sql>
+
+    <!--插入的动态sql 对空值进行处理 key-->
+    <sql id="insert_columns_key">
+        <trim suffixOverrides=",">
+            <if test="id!=0 ">
+                `id`,
+            </if>
+            <if test="enrolName!=null and enrolName!=''">
+                `enrol_name`,
+            </if>
+            <if test="enrolContent!=null and enrolContent!=''">
+                `enrol_content`,
+            </if>
+            <if test="enrolCount!=0">
+                `enrol_count`,
+            </if>
+            <if test="enrolCode!=0">
+                `enrol_code`,
+            </if>
+        </trim>
+    </sql>
+
+    <!--插入的动态sql 对空值进行处理 value-->
+    <sql id="insert_property_value">
+        <trim suffixOverrides=",">
+            <if test="id!=0 ">
+                #{id},
+            </if>
+            <if test="enrolName!=null and enrolName!=''">
+                #{enrolName},
+            </if>
+            <if test="enrolContent!=null and enrolContent!=''">
+                #{enrolContent},
+            </if>
+            <if test="enrolCount!=0">
+                #{enrolCount},
+            </if>
+            <if test="enrolCode!=0">
+                #{enrolCode},
+            </if>
+        </trim>
+    </sql>
+
+    <!--注入参数多次复用 备用-->
+    <sql id="enrol_property">
+        #{id},
+        #{enrolName},
+        #{enrolContent},
+        #{enrolCount},
+        #{enrolCode},
+    </sql>
+
+    <!--查询所有年级-->
+    <select id="queryEnrols" resultMap="enrol">
+        SELECT
+        <include refid="enrol_columns"/>
+        FROM t_sys_enrol;
+    </select>
+
+    <!--查询年级根据年级id-->
+    <select id="queryEnrolById" parameterType="int" resultMap="enrol">
+        SELECT
+        <include refid="enrol_columns"/>
+        FROM t_sys_enrol WHERE `id`=#{id};
+    </select>
+
+    <!--查询年级根据年级实体 返回一个list-->
+    <!--trim 动态查询 如果因为AND 不能直接在where后面-->
+    <select id="queryEnrolByEnrol" parameterType="enrolEntity" resultMap="enrol">
+        SELECT
+        <include refid="enrol_columns"/>
+        FROM t_sys_enrol
+        <trim prefix="WHERE" prefixOverrides="AND">
+            <if test="id != 0">
+                `id` = #{id}
+            </if>
+            <if test="enrolName != null">
+                AND `enrol_name` like #{enrolName}
+            </if>
+            <if test="enrolContent != null">
+                AND `enrol_content` like #{enrolContent}
+            </if>
+            <if test="enrolCount != 0">
+                AND `enrol_count` = #{enrolCount}
+            </if>
+            <if test="enrolCode != 0">
+                AND `enrol_code` = #{enrolCode}
+            </if>
+        </trim>
+    </select>
+
+    <!--修改年级信息-->
+    <!--这时就需要进行动态SQL拼接，如下，使用trim就是为了删掉最后字段的“,”。主要不用单独写SET了，因为set被包含在trim中了-->
+    <update id="updateEnrolById" parameterType="enrolEntity">
+        UPDATE `t_sys_enrol`
+        <trim prefix="set" suffixOverrides=",">
+
+            <if test="enrolName!=null">
+                `enrol_name`=#{enrolName},
+            </if>
+            <if test="enrolContent!=null">
+                `enrol_content`=#{enrolContent},
+            </if>
+            <if test="enrolCount!=0">
+                `enrol_name`=#{enrolCount},
+            </if>
+            <if test="enrolCode!=0">
+                `enrol_count`=#{enrolCode},
+            </if>
+        </trim>
+        WHERE `id` = #{id};
+    </update>
+
+    <!--插入年级信息-->
+    <!--默认添加用户的角色是学生 不能使用需要管理员进行授权之后才能开通账号-->
+    <insert id="insertEnrol" parameterType="enrolEntity" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO `t_sys_enrol` (<include refid="insert_columns_key"/>) VALUES (<include
+            refid="insert_property_value"/>)
+    </insert>
+
+    <!--删除年级根据id-->
+    <delete id="deleteEnrolById">
+       DELETE FROM `t_sys_enrol` WHERE `id`=#{id}
+    </delete>
 </mapper>

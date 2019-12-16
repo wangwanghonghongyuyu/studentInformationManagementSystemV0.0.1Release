@@ -6,7 +6,7 @@ import lombok.Data;
  * 年级实体类
  */
 @Data
-public class Enrolentity {
+public class EnrolEntity {
     private int id;//
     private String enrolName;//年级名称
     private String enrolContent;//入学人数

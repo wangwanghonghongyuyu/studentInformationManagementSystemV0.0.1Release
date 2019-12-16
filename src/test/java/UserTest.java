@@ -1,5 +1,7 @@
 import com.alibaba.fastjson.JSON;
+import com.edu.smsys.dao.entity.EnrolEntity;
 import com.edu.smsys.dao.entity.UserEntity;
+import com.edu.smsys.dao.mapper.EnrolEntityMapper;
 import com.edu.smsys.service.impl.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
@@ -14,7 +16,9 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 public class UserTest {
 
     @Autowired
-    UserService userService;
+    private UserService userService;
+    @Autowired
+    private EnrolEntityMapper enrolEntityMapper;
     @Test
     public void login(){
         UserEntity user =userService.findUserByCodeAndPassword("201912010001","123456");
@@ -25,5 +29,42 @@ public class UserTest {
         UserEntity user =userService.findUserByCodeAndPassword("201912010001","123456");
         user.setUserCode("201912010002");
         log.debug("用户添加回填主键id：{}",userService.register("201912010003","123456"));
+    }
+
+    @Test
+    public void addEnrol(){
+        for (int i=1;i<=9;i++){
+            EnrolEntity data=new EnrolEntity();
+            data.setEnrolName(i+"年级");
+            data.setEnrolCode(1);
+            data.setEnrolContent("balabalabalbalbla");
+            data.setEnrolCount((int) (Math.random()*100));
+            int insertCount=enrolEntityMapper.insertEnrol(data);
+            log.debug("执行成功，影响记录行数为 {}",insertCount);
+        }
+    }
+
+    @Test
+    public void selectEnrolAll(){
+        log.debug("执行成功，返回全部年级信息 {}",JSON.toJSONString(enrolEntityMapper.queryEnrols()));
+    }
+
+    @Test
+    public void selectEnrolLike(){
+        EnrolEntity data=new EnrolEntity();
+        //data.setEnrolName("1年级");
+        //data.setEnrolCode(1);
+        data.setEnrolContent("balabalabalbalbla");
+        //data.setEnrolCount((int) (Math.random()*100));
+        log.debug("模糊查询传入一个对象 {}",JSON.toJSON(enrolEntityMapper.queryEnrolByEnrol(data)));
+    }
+
+    @Test
+    public void updateEnrol(){
+        EnrolEntity data=new EnrolEntity();
+        data.setId(13);
+        data.setEnrolContent("修改12点06分2019年12月16日");
+        int updateCount=enrolEntityMapper.updateEnrolById(data);
+        log.debug("执行成功，影响记录行数为 {}",updateCount);
     }
 }
