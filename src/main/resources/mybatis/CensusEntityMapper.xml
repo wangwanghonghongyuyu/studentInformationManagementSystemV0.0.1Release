@@ -3,5 +3,202 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.edu.smsys.dao.mapper.CensusEntityMapper">
+    <!--2019年12月16日-->
+    <!--学籍实体映射-->
+    <resultMap id="census" type="CensusEntity">
+        <id property="id" column="id"/>
+        <result property="targetScore" column="target_score"></result>
+        <result property="currentScore" column="current_score"></result>
+        <result property="schoolEvent" column="schoolevent"></result>
+        <result property="graduationTime" column="graduation_time"></result>
+        <result property="currentEnrol" column="curent_enrol"></result>
+        <result property="schoolEvaluation" column="school_evaluation"></result>
+        <result property="dangerValid" column="danger_valid"></result>
+        <result property="teacherId" column="teacher_id"></result>
+    </resultMap>
 
+    <!--sql 目的为了多次复用-->
+    <sql id="census_columns">
+        `id`,
+        `target_score`,
+        `current_score`,
+        `schoolevent`,
+        `graduation_time`,
+        `curent_enrol`,
+        `school_evaluation`,
+        `danger_valid`,
+        `teacher_id`,
+    </sql>
+
+    <!--插入的动态sql 对空值进行处理 key-->
+    <sql id="insert_columns_key">
+        <trim suffixOverrides=",">
+            <if test="id!=0 ">
+                `id`,
+            </if>
+            <if test="targetScore!=0">
+                `target_score`,
+            </if>
+            <if test="currentScore!=0">
+                `current_score`,
+            </if>
+            <if test="schoolEvent!=null">
+                `schoolevent`,
+            </if>
+            <if test="graduationTime!=null">
+                `graduation_time`,
+            </if>
+            <if test="currentEnrol!=null">
+                `curent_enrol`,
+            </if>
+            <if test="schoolEvaluation!=null">
+                `school_evaluation`,
+            </if>
+            <if test="dangerValid!=null">
+                `danger_valid`,
+            </if>
+            <if test="teacherId!=0">
+                `teacher_id`,
+            </if>
+        </trim>
+    </sql>
+
+    <!--插入的动态sql 对空值进行处理 value-->
+    <sql id="insert_property_value">
+        <trim suffixOverrides=",">
+            <trim suffixOverrides=",">
+                <if test="id!=0 ">
+                    #{id},
+                </if>
+                <if test="targetScore!=0">
+                    #{targetScore},
+                </if>
+                <if test="currentScore!=0">
+                    #{currentScore},
+                </if>
+                <if test="schoolEvent!=null">
+                    #{schoolEvent},
+                </if>
+                <if test="graduationTime!=null">
+                    #{graduationTime},
+                </if>
+                <if test="currentEnrol!=null">
+                    #{currentEnrol},
+                </if>
+                <if test="schoolEvaluation!=null">
+                    #{schoolEvaluation},
+                </if>
+                <if test="dangerValid!=null">
+                    #{dangerValid},
+                </if>
+                <if test="teacherId!=0">
+                    #{teacherId},
+                </if>
+            </trim>
+        </trim>
+    </sql>
+
+    <!--模糊查询通配符连接-->
+    <sql id="like_left">
+        concat('%',
+    </sql>
+    <!--模糊查询通配符连接-->
+    <sql id="like_right">
+        ,'%')
+    </sql>
+
+    <!--查询所有学籍-->
+    <select id="queryCensuses" resultMap="census">
+        SELECT
+        <include refid="census_columns"/>
+        FROM t_sys_census;
+    </select>
+
+    <!--查询学籍根据学籍id-->
+    <select id="queryCensusById" parameterType="int" resultMap="census">
+        SELECT
+        <include refid="class_columns"/>
+        FROM t_sys_census WHERE `id`=#{id};
+    </select>
+
+    <!--查询学籍根据学籍实体 返回一个list-->
+    <!--trim 动态查询 如果因为AND 不能直接在where后面-->
+    <select id="queryCensusByCensus" parameterType="censusEntity" resultMap="census">
+        SELECT
+        <include refid="class_columns"/>
+        FROM t_sys_census
+        <trim prefix="WHERE" prefixOverrides="AND">
+            <if test="id!=0 ">
+                `id` = #{id},
+            </if>
+            <if test="targetScore!=0">
+                AND  `target_score` = #{targetScore},
+            </if>
+            <if test="currentScore!=0">
+                AND `current_score` = #{currentScore},
+            </if>
+            <if test="schoolEvent!=null">
+                AND `schoolevent` LIKE #{schoolEvent},
+            </if>
+            <if test="currentEnrol!=null">
+                AND `curent_enrol` LIKE #{currentEnrol},
+            </if>
+            <if test="schoolEvaluation!=null">
+                AND `school_evaluation` LIKE #{schoolEvaluation},
+            </if>
+            <if test="dangerValid!=null">
+                AND `danger_valid` LIKE #{dangerValid},
+            </if>
+            <if test="teacherId!=0">
+                AND `teacher_id` =  #{teacherId},
+            </if>
+        </trim>
+    </select>
+
+    <!--修改学籍信息-->
+    <!--这时就需要进行动态SQL拼接，如下，使用trim就是为了删掉最后字段的“,”。主要不用单独写SET了，因为set被包含在trim中了-->
+    <update id="updateCensusById" parameterType="censusEntity">
+        UPDATE `t_sys_census`
+        <trim prefix="set" suffixOverrides=",">
+            <if test="id!=0 ">
+                `id` = #{id},
+            </if>
+            <if test="targetScore!=0">
+                `target_score` = #{targetScore},
+            </if>
+            <if test="currentScore!=0">
+                 `current_score` = #{currentScore},
+            </if>
+            <if test="schoolEvent!=null">
+                 `schoolevent` = #{schoolEvent},
+            </if>
+            <if test="currentEnrol!=null">
+                 `curent_enrol` = #{currentEnrol},
+            </if>
+            <if test="graduationTime!=null">
+                `graduation_time` = #{graduationTime},
+            </if>
+            <if test="schoolEvaluation!=null">
+                 `school_evaluation` = #{schoolEvaluation},
+            </if>
+            <if test="dangerValid!=null">
+                 `danger_valid` = #{dangerValid},
+            </if>
+            <if test="teacherId!=0">
+                 `teacher_id` =  #{teacherId},
+            </if>
+        </trim>
+        WHERE `id` = #{id};
+    </update>
+
+    <!--插入学籍信息-->
+    <insert id="insertCensus" parameterType="censusEntity" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO `t_sys_census` (<include refid="insert_columns_key"/>) VALUES (<include
+            refid="insert_property_value"/>)
+    </insert>
+
+    <!--删除学籍根据id-->
+    <delete id="deleteCensusById" parameterType="int">
+       DELETE FROM `t_sys_census` WHERE `id`=#{id}
+    </delete>
 </mapper>

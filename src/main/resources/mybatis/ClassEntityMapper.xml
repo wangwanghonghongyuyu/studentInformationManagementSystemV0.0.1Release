@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.edu.smsys.dao.mapper.ClassEntityMapper">
     <!--2019年12月16日-->
-    <!--年级实体映射-->
+    <!--班级实体映射-->
     <resultMap id="classes" type="ClassEntity">
         <id property="id" column="id"/>
         <result property="classCode" column="class_code"></result>
@@ -128,7 +128,6 @@
     </update>
 
     <!--插入班级信息-->
-    <!--默认添加用户的角色是学生 不能使用需要管理员进行授权之后才能开通账号-->
     <insert id="insertClass" parameterType="classEntity" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO `t_sys_class` (<include refid="insert_columns_key"/>) VALUES (<include
             refid="insert_property_value"/>)
