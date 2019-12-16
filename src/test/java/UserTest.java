@@ -1,6 +1,8 @@
 import com.alibaba.fastjson.JSON;
+import com.edu.smsys.dao.entity.ClassEntity;
 import com.edu.smsys.dao.entity.EnrolEntity;
 import com.edu.smsys.dao.entity.UserEntity;
+import com.edu.smsys.dao.mapper.ClassEntityMapper;
 import com.edu.smsys.dao.mapper.EnrolEntityMapper;
 import com.edu.smsys.service.impl.UserService;
 import lombok.extern.slf4j.Slf4j;
@@ -19,6 +21,8 @@ public class UserTest {
     private UserService userService;
     @Autowired
     private EnrolEntityMapper enrolEntityMapper;
+    @Autowired
+    private ClassEntityMapper classEntityMapper;
     @Test
     public void login(){
         UserEntity user =userService.findUserByCodeAndPassword("201912010001","123456");
@@ -52,10 +56,10 @@ public class UserTest {
     @Test
     public void selectEnrolLike(){
         EnrolEntity data=new EnrolEntity();
-        //data.setEnrolName("1年级");
-        //data.setEnrolCode(1);
+        data.setEnrolName("1年级");
+        data.setEnrolCode(1);
         data.setEnrolContent("balabalabalbalbla");
-        //data.setEnrolCount((int) (Math.random()*100));
+        data.setEnrolCount((int) (Math.random()*100));
         log.debug("模糊查询传入一个对象 {}",JSON.toJSON(enrolEntityMapper.queryEnrolByEnrol(data)));
     }
 
@@ -66,5 +70,43 @@ public class UserTest {
         data.setEnrolContent("修改12点06分2019年12月16日");
         int updateCount=enrolEntityMapper.updateEnrolById(data);
         log.debug("执行成功，影响记录行数为 {}",updateCount);
+    }
+
+    @Test
+    public void deleteEnrol(){
+        int deleteCount =enrolEntityMapper.deleteEnrolById(13);
+        log.debug("执行成功，影响记录行数为 {}",deleteCount);
+    }
+
+    @Test
+    public  void addClass(){
+        for (int i=0;i<=50;i++){
+            ClassEntity entity=new ClassEntity();
+            entity.setEnrolId(13);
+            entity.setClassCode(String.valueOf(i));
+            entity.setClassName(i+"班--小学部");
+            int addCount=classEntityMapper.insertClass(entity);
+            log.debug("执行成功，影响记录行数为 {}",addCount);
+        }
+    }
+
+    @Test
+    public void findList(){
+        log.debug("查询所有班级信息 {}",JSON.toJSONString(classEntityMapper.queryClasses()));
+    }
+
+    @Test
+    public void findClassByClass(){
+        ClassEntity entity=new ClassEntity();
+        entity.setClassName("小学部");
+        log.debug("查询所有班级信息 {}",JSON.toJSONString(classEntityMapper.queryClassByClass(entity)));
+    }
+
+    @Test
+    public void updateClassById(){
+        ClassEntity classEntity=new ClassEntity();
+        classEntity.setId(1);
+        classEntity.setClassName("一年级--高中部");
+        log.debug("执行成功，影响记录行数为 {}",classEntityMapper.updateClassById(classEntity));
     }
 }

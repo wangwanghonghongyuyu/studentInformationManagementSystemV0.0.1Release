@@ -3,5 +3,138 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.edu.smsys.dao.mapper.ClassEntityMapper">
+    <!--年级实体映射-->
+    <resultMap id="classes" type="ClassEntity">
+        <id property="id" column="id"/>
+        <result property="classCode" column="class_code"></result>
+        <result property="className" column="class_name"></result>
+        <result property="enrolId" column="enrol_id"></result>
+    </resultMap>
 
+    <!--sql 目的为了多次复用-->
+    <sql id="class_columns">
+        `id`,
+        `class_code`,
+        `class_name`,
+        `enrol_id`
+    </sql>
+
+    <!--插入的动态sql 对空值进行处理 key-->
+    <sql id="insert_columns_key">
+        <trim suffixOverrides=",">
+            <if test="id!=0 ">
+                `id`,
+            </if>
+            <if test="classCode!=null and classCode!=''">
+                `class_code`,
+            </if>
+            <if test="className!=null and className!=''">
+                `class_name`,
+            </if>
+            <if test="enrolId!=0">
+                `enrol_id`,
+            </if>
+        </trim>
+    </sql>
+
+    <!--插入的动态sql 对空值进行处理 value-->
+    <sql id="insert_property_value">
+        <trim suffixOverrides=",">
+            <if test="id!=0 ">
+                #{id},
+            </if>
+            <if test="classCode!=null and classCode!=''">
+                #{classCode},
+            </if>
+            <if test="className!=null and className!=''">
+                #{className},
+            </if>
+            <if test="enrolId!=0">
+                #{enrolId},
+            </if>
+        </trim>
+    </sql>
+
+    <!--注入参数多次复用 备用-->
+    <sql id="class_property">
+        #{id},
+        #{classCode},
+        #{className},
+        #{enrolId},
+    </sql>
+
+    <!--模糊查询通配符连接-->
+    <sql id="like_left">
+        concat('%',
+    </sql>
+    <!--模糊查询通配符连接-->
+    <sql id="like_right">
+        ,'%')
+    </sql>
+
+    <!--查询所有班级-->
+    <select id="queryClasses" resultMap="classes">
+        SELECT
+        <include refid="class_columns"/>
+        FROM t_sys_class;
+    </select>
+
+    <!--查询班级根据班级id-->
+    <select id="queryClassById" parameterType="int" resultMap="classes">
+        SELECT
+        <include refid="class_columns"/>
+        FROM t_sys_class WHERE `id`=#{id};
+    </select>
+
+    <!--查询班级根据班级实体 返回一个list-->
+    <!--trim 动态查询 如果因为AND 不能直接在where后面-->
+    <select id="queryClassByClass" parameterType="classEntity" resultMap="classes">
+        SELECT
+        <include refid="class_columns"/>
+        FROM t_sys_class
+        <trim prefix="WHERE" prefixOverrides="AND">
+            <if test="id != 0">
+                `id` = #{id}
+            </if>
+            <if test="classCode != null">
+                AND `class_code` like #{classCode}
+            </if>
+            <if test="className != null">
+                AND `class_name` like <include refid="like_left"/>#{className}<include refid="like_right"/>
+            </if>
+            <if test="enrolId != 0">
+                AND `enrol_id` = #{enrolId}
+            </if>
+        </trim>
+    </select>
+
+    <!--修改班级信息-->
+    <!--这时就需要进行动态SQL拼接，如下，使用trim就是为了删掉最后字段的“,”。主要不用单独写SET了，因为set被包含在trim中了-->
+    <update id="updateClassById" parameterType="classEntity">
+        UPDATE `t_sys_class`
+        <trim prefix="set" suffixOverrides=",">
+            <if test="classCode!=null">
+                `class_code`=#{classCode},
+            </if>
+            <if test="className!=null">
+                `class_name`=#{className},
+            </if>
+            <if test="enrolId!=0">
+                `enrol_id`=#{enrolId},
+            </if>
+        </trim>
+        WHERE `id` = #{id};
+    </update>
+
+    <!--插入班级信息-->
+    <!--默认添加用户的角色是学生 不能使用需要管理员进行授权之后才能开通账号-->
+    <insert id="insertClass" parameterType="classEntity" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO `t_sys_class` (<include refid="insert_columns_key"/>) VALUES (<include
+            refid="insert_property_value"/>)
+    </insert>
+
+    <!--删除年级根据id-->
+    <delete id="deleteClassById" parameterType="int">
+       DELETE FROM `t_sys_class` WHERE `id`=#{id}
+    </delete>
 </mapper>

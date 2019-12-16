@@ -72,6 +72,15 @@
         #{enrolCode},
     </sql>
 
+    <!--模糊查询通配符连接-->
+    <sql id="like_left">
+        concat('%',
+    </sql>
+    <!--模糊查询通配符连接-->
+    <sql id="like_right">
+        ,'%')
+    </sql>
+
     <!--查询所有年级-->
     <select id="queryEnrols" resultMap="enrol">
         SELECT
@@ -97,7 +106,7 @@
                 `id` = #{id}
             </if>
             <if test="enrolName != null">
-                AND `enrol_name` like #{enrolName}
+                AND `enrol_name` like <include refid="like_left"/>#{enrolName}<include refid="like_right"/>
             </if>
             <if test="enrolContent != null">
                 AND `enrol_content` like #{enrolContent}
