@@ -51,6 +51,73 @@
         #{classId},
         #{enrolId}
     </sql>
+
+    <!--插入的动态sql 对空值进行处理 key-->
+    <sql id="insert_columns_key">
+        <trim suffixOverrides=",">
+            <if test="id!=0 ">
+                `id`,
+            </if>
+            <if test="censusId!=null and censusId!=''">
+                `census_id`,
+            </if>
+            <if test="telephone!=null">
+                `telephone`,
+            </if>
+            <if test="homeAddress!=null and homeAddress!=''">
+                `home_address`,
+            </if>
+            <if test="name!=null">
+                `name`,
+            </if>
+            <if test="age!=0">
+                `age`,
+            </if>
+            <if test="valid!=0">
+                `valid`,
+            </if>
+            <if test="classId!=0">
+                `class_id`,
+            </if>
+            <if test="enrolId!=0">
+                `enrol_id`,
+            </if>
+        </trim>
+    </sql>
+
+    <!--插入的动态sql 对空值进行处理 value-->
+    <sql id="insert_property_value">
+        <trim suffixOverrides=",">
+            <if test="id!=0 ">
+                #{id},
+            </if>
+            <if test="censusId!=0">
+                #{censusId},
+            </if>
+            <if test="telephone!=null and telephone!=''">
+                #{telephone},
+            </if>
+            <if test="homeAddress!=null">
+                #{homeAddress},
+            </if>
+            <if test="name!=null">
+                #{name},
+            </if>
+            <if test="age!=0">
+                #{age},
+            </if>
+            <if test="valid!=0">
+                #{valid},
+            </if>
+            <if test="classId!=0">
+                #{classId},
+            </if>
+            <if test="enrolId!=0">
+                #{enrolId},
+            </if>
+        </trim>
+    </sql>
+
     <select id="queryAllStudent" resultMap="studnet">
         SELECT <include refid="studnet_columns" /> FROM t_sys_student;
     </select>
@@ -58,4 +125,86 @@
     <select id="selectCount" resultType="int">
         select COUNT(*) AS counts FROM t_sys_student ;
     </select>
+
+    <!--查询学生根据学生 返回一个list-->
+    <!--trim 动态查询 如果因为AND 不能直接在where后面-->
+    <select id="queryStudentByStudent" parameterType="studentEntity" resultMap="student">
+        SELECT
+        <include refid="studnet_columns"/>
+        FROM t_sys_student
+        <trim prefix="WHERE" prefixOverrides="AND">
+
+            <if test="id!=0 ">
+                #{id},
+            </if>
+            <if test="censusId!=0 ">
+                AND `census_id` = #{censusId},
+            </if>
+            <if test="telephone!=null and telephone!=''">
+                AND `telephone`=#{telephone},
+            </if>
+                <if test="homeAddress!=null">
+                AND `home_address`=#{homeAddress},
+            </if>
+            <if test="name!=null">
+                AND `name`=#{name},
+            </if>
+            <if test="age!=0">
+                AND `age`=#{age},
+            </if>
+            <if test="valid!=0">
+                AND `valid`=#{valid},
+            </if>
+            <if test="classId!=0">
+                AND `class_id`=#{classId},
+            </if>
+            <if test="enrolId!=0">
+                AND `enrol_id`=#{enrolId},
+            </if>
+        </trim>
+    </select>
+
+    <!--修改家长信息-->
+    <!--这时就需要进行动态SQL拼接，如下，使用trim就是为了删掉最后字段的“,”。主要不用单独写SET了，因为set被包含在trim中了-->
+    <update id="updateStudentsById" parameterType="studentEntity">
+        UPDATE `t_sys_student`
+        <trim prefix="set" suffixOverrides=",">
+            <if test="censusId!=0 ">
+                 `census_id` = #{censusId},
+            </if>
+            <if test="telephone!=null and telephone!=''">
+                 `telephone`=#{telephone},
+            </if>
+            <if test="homeAddress!=null">
+                 `home_address`=#{homeAddress},
+            </if>
+            <if test="name!=null">
+                 `name`=#{name},
+            </if>
+            <if test="age!=0">
+                 `age`=#{age},
+            </if>
+            <if test="valid!=0">
+                 `valid`=#{valid},
+            </if>
+            <if test="classId!=0">
+                 `class_id`=#{classId},
+            </if>
+            <if test="enrolId!=0">
+                 `enrol_id`=#{enrolId},
+            </if>
+        </trim>
+        WHERE `id` = #{id};
+    </update>
+
+    <!--插入学生信息-->
+    <insert id="insertStudent" parameterType="studentEntity" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO `t_sys_student` (<include refid="insert_columns_key"/>) VALUES (<include
+            refid="insert_property_value"/>)
+    </insert>
+
+    <!--删除学生根据id-->
+    <delete id="deleteStudentById" parameterType="int">
+       DELETE FROM `t_sys_student` WHERE `id`=#{id}
+    </delete>
 </mapper>

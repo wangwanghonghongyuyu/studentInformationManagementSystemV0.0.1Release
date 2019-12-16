@@ -126,9 +126,6 @@
     <update id="updateParentsById" parameterType="parentEntity">
         UPDATE `t_sys_parent`
         <trim prefix="set" suffixOverrides=",">
-            <if test="id!=0 ">
-                #{id},
-            </if>
             <if test="parentName!=null and parentName!=''">
                  `parent_name` = #{parentName},
             </if>

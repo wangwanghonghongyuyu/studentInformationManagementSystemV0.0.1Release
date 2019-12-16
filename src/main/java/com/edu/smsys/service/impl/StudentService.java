@@ -65,31 +65,31 @@ public class StudentService implements BaseService<StudentEntity> {
 
     @Override
     public List<StudentEntity> findAll() {
-        return null;
+        return studentEntityMapper.queryAllStudent();
     }
 
     @Override
     public StudentEntity findEntityById(int id) {
-        return null;
+        return studentEntityMapper.queryClassById(id);
     }
 
     @Override
     public List<StudentEntity> findEntity(StudentEntity entity) {
-        return null;
+        return studentEntityMapper.queryStudentByStudent(entity);
     }
 
     @Override
     public int updateEntity(StudentEntity entity) {
-        return 0;
+        return studentEntityMapper.updateStudentById(entity);
     }
 
     @Override
     public int addEntity(StudentEntity entity) {
-        return 0;
+        return studentEntityMapper.insertStudent(entity);
     }
 
     @Override
     public int deleteEntity(int id) {
-        return 0;
+        return studentEntityMapper.deleteStudentById(id);
     }
 }
