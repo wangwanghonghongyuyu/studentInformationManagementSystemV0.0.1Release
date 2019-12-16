@@ -4,6 +4,7 @@ import com.edu.smsys.dao.entity.EnrolEntity;
 import com.edu.smsys.dao.entity.UserEntity;
 import com.edu.smsys.dao.mapper.ClassEntityMapper;
 import com.edu.smsys.dao.mapper.EnrolEntityMapper;
+import com.edu.smsys.dao.mapper.TeacherEntityMapper;
 import com.edu.smsys.service.impl.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
@@ -23,6 +24,8 @@ public class UserTest {
     private EnrolEntityMapper enrolEntityMapper;
     @Autowired
     private ClassEntityMapper classEntityMapper;
+    @Autowired
+    private TeacherEntityMapper teacherEntityMapper;
     @Test
     public void login(){
         UserEntity user =userService.findUserByCodeAndPassword("201912010001","123456");
@@ -108,5 +111,9 @@ public class UserTest {
         classEntity.setId(1);
         classEntity.setClassName("一年级--高中部");
         log.debug("执行成功，影响记录行数为 {}",classEntityMapper.updateClassById(classEntity));
+    }
+
+    public void addTeacher(){
+        //teacherEntityMapper.insertTeacher();
     }
 }

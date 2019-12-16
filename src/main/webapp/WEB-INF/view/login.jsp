@@ -197,7 +197,7 @@
      */
     function isExistence(){
         var userCode=$("#registerform .user-code").val();
-        //console.log(userCode);
+        //console.log(userCode); 测试用的log输出
         $.ajax({
             url:_baselocation+"/is-existence",
             type: 'post',
@@ -211,9 +211,6 @@
                     $(".register-prompt").text("");//清空
                 }
             },
-            error: function (XMLHttpRequest, textStatus, errorThrown) {
-                console.log(textStatus, errorThrown);
-            }
         });
     }
 </script>
