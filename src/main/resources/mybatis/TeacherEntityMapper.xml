@@ -58,10 +58,10 @@
             <if test="telephone!=null and telephone!=''">
                 `telephone`,
             </if>
-            <if test="teacherStartTime!=null and teacherStartTime!=''">
+            <if test="teacherStartTime!=null">
                 `teacher_start_time`,
             </if>
-            <if test="teacherSalary!=null and teacherSalary!=''">
+            <if test="teacherSalary!=0">
                 `teacher_salary`,
             </if>
             <if test="teacherAddress!=null and teacherAddress!=''">
@@ -91,10 +91,10 @@
             <if test="telephone!=null and telephone!=''">
                 #{telephone},
             </if>
-            <if test="teacherStartTime!=null and teacherStartTime!=''">
+            <if test="teacherStartTime!=null">
                 #{teacherStartTime},
             </if>
-            <if test="teacherSalary!=null and teacherSalary!=''">
+            <if test="teacherSalary!=0">
                 #{teacherSalary},
             </if>
             <if test="teacherAddress!=null and teacherAddress!=''">
@@ -125,7 +125,7 @@
     </select>
 
     <!--查询所有所有老师-->
-    <select id="queryTeaChers" resultMap="classes">
+    <select id="queryTeaChers" resultMap="teacher">
         SELECT
         <include refid="teacher_columns"/>
         FROM t_sys_teacher;

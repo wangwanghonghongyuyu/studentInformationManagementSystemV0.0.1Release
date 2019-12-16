@@ -1,6 +1,7 @@
 import com.alibaba.fastjson.JSON;
 import com.edu.smsys.dao.entity.ClassEntity;
 import com.edu.smsys.dao.entity.EnrolEntity;
+import com.edu.smsys.dao.entity.TeacherEntity;
 import com.edu.smsys.dao.entity.UserEntity;
 import com.edu.smsys.dao.mapper.ClassEntityMapper;
 import com.edu.smsys.dao.mapper.EnrolEntityMapper;
@@ -12,6 +13,8 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import java.util.Date;
 
 @Slf4j
 @RunWith(SpringJUnit4ClassRunner.class) //指定测试用例的运行器 这里是指定了Junit4
@@ -113,7 +116,17 @@ public class UserTest {
         log.debug("执行成功，影响记录行数为 {}",classEntityMapper.updateClassById(classEntity));
     }
 
+    @Test
     public void addTeacher(){
-        //teacherEntityMapper.insertTeacher();
+        TeacherEntity entity=new TeacherEntity();
+        entity.setTeacherAddress("辽宁省大连市旅顺口区大连外国语学院");
+        entity.setTeacherCode("20191216001");
+        entity.setTeacherName("吕少峰");
+        entity.setTelephone("18741145214");
+        entity.setTeacherSalary(1500.57);
+        entity.setTeacherStartTime(new Date());
+        entity.setUserId(1);
+        log.debug("执行成功，影响记录行数为 {}", teacherEntityMapper.insertTeacher(entity));
     }
+
 }
