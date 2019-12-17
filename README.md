@@ -33,7 +33,7 @@ studentInfoSys 是一个通用的基础的后台管理系统，它基于SpringMV
 
 - 克隆本项目
 - 导入idea或者eclipse，确保开发工具安装了lombok插件，如果不了解该插件，请自行搜索
-- 创建数据库： 请运行 student_baseV20191217.sql
+- 创建数据库： 请运行 student_baseV20191217_2.sql
 - 更改配置文件中相应数据库配置
 - 启动：请联系QQ/VX:874978132
 - 访问 http://localhost:8080/，   
