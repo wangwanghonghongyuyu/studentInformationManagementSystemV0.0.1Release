@@ -10,6 +10,7 @@
         <result property="scoreType" column="score_type"></result>
         <result property="ScoreValue" column="score_value"></result>
         <result property="scoreTime" column="score_time"></result>
+        <result property="studentId" column="student_id"></result>
     </resultMap>
 
     <sql id="score_columns">
@@ -18,6 +19,7 @@
         `score_type`,
         `score_value`,
         `score_time`,
+        `student_id`
     </sql>
 
     <!--插入的动态sql 对空值进行处理 key-->
@@ -38,6 +40,9 @@
             <if test="scoreTime!=null">
                 `score_time`,
             </if>
+            <if test="studentId!=0">
+                `student_id`,
+            </if>
         </trim>
     </sql>
 
@@ -57,7 +62,10 @@
                 #{ScoreValue},
             </if>
             <if test="scoreTime!=null">
-                #{workArea},
+                #{scoreTime},
+            </if>
+            <if test="studentId!=0">
+                #{studentId},
             </if>
         </trim>
     </sql>
@@ -70,7 +78,7 @@
     </select>
 
     <!--查询成绩根据成绩id-->
-    <select id="queryParentById" parameterType="int" resultMap="parent">
+    <select id="queryScoreById" parameterType="int" resultMap="score">
         SELECT
         <include refid="score_columns"/>
         FROM t_sys_student_score WHERE `id`=#{id};
@@ -88,28 +96,28 @@
                 #{id},
             </if>
             <if test="scoreCode!=null and scoreCode!=''">
-                AND `score_code` LIKE #{scoreCode},
+                AND `score_code` LIKE #{scoreCode}
             </if>
             <if test="scoreType!=0">
-                AND `score_type`=#{scoreType},
+                AND `score_type`=#{scoreType}
             </if>
             <if test="scoreValue!=null and scoreValue!=''">
-                AND `score_value`=#{ScoreValue},
+                AND `score_value`=#{ScoreValue}
             </if>
             <if test="scoreTime!=null">
-                AND `score_time`=#{scoreTime},
+                AND `score_time`=#{scoreTime}
+            </if>
+            <if test="studentId!=0">
+                AND `student_id`=#{studentId}
             </if>
         </trim>
     </select>
 
     <!--修改成绩信息-->
     <!--这时就需要进行动态SQL拼接，如下，使用trim就是为了删掉最后字段的“,”。主要不用单独写SET了，因为set被包含在trim中了-->
-    <update id="updateParentsById" parameterType="parentEntity">
-        UPDATE `t_sys_parent`
+    <update id="updateScoresById" parameterType="scoreEntity">
+        UPDATE `t_sys_student_score`
         <trim prefix="set" suffixOverrides=",">
-            <if test="id!=0 ">
-                #{id},
-            </if>
             <if test="scoreCode!=null and scoreCode!=''">
                 `score_code` = #{scoreCode},
             </if>
@@ -122,6 +130,9 @@
             <if test="scoreTime!=null">
                 `score_time`=#{scoreTime},
             </if>
+            <if test="studentId!=0">
+                `student_id`=#{studentId},
+            </if>
         </trim>
         WHERE `id` = #{id};
     </update>
@@ -133,7 +144,7 @@
     </insert>
 
     <!--删除成绩根据id-->
-    <delete id="deleteParentById" parameterType="int">
+    <delete id="deleteScoreById" parameterType="int">
        DELETE FROM `t_sys_student_score` WHERE `id`=#{id}
     </delete>
 </mapper>

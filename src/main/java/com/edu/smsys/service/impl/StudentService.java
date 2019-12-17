@@ -63,31 +63,60 @@ public class StudentService implements BaseService<StudentEntity> {
         return studentEntityMapper.selectCount();
     }
 
+    /**
+     * 查询所有学生信息
+     * @return
+     */
     @Override
     public List<StudentEntity> findAll() {
         return studentEntityMapper.queryAllStudent();
     }
 
+    /**
+     * 统计学生个数
+     * @param id
+     * @return
+     */
     @Override
     public StudentEntity findEntityById(int id) {
         return studentEntityMapper.queryClassById(id);
     }
 
+    /**
+     * 查询所有学生
+     * @param entity
+     * @return
+     */
     @Override
     public List<StudentEntity> findEntity(StudentEntity entity) {
         return studentEntityMapper.queryStudentByStudent(entity);
     }
 
+    /**
+     * 修改学生根据学生id
+     * @param entity
+     * @return
+     */
     @Override
     public int updateEntity(StudentEntity entity) {
         return studentEntityMapper.updateStudentById(entity);
     }
 
+    /**
+     * 插入学生信息
+     * @param entity
+     * @return
+     */
     @Override
     public int addEntity(StudentEntity entity) {
         return studentEntityMapper.insertStudent(entity);
     }
 
+    /**
+     * 删除学生根据id
+     * @param id
+     * @return
+     */
     @Override
     public int deleteEntity(int id) {
         return studentEntityMapper.deleteStudentById(id);

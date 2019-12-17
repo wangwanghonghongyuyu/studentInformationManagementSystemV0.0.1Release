@@ -35,7 +35,7 @@ public interface ScoreEntityMapper {
      * @param scoreEntity
      * @return
      */
-    public int updateScoreById(ScoreEntity scoreEntity);
+    public int updateScoresById(ScoreEntity scoreEntity);
 
     /**
      * 插入成绩信息

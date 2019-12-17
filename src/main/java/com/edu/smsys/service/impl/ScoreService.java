@@ -53,7 +53,7 @@ public class ScoreService implements BaseService<ScoreEntity> {
      */
     @Override
     public int updateEntity(ScoreEntity entity) {
-        return scoreEntityMapper.updateScoreById(entity);
+        return scoreEntityMapper.updateScoresById(entity);
     }
 
     /**

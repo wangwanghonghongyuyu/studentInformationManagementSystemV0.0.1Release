@@ -27,7 +27,7 @@
         `curent_enrol`,
         `school_evaluation`,
         `danger_valid`,
-        `teacher_id`,
+        `teacher_id`
     </sql>
 
     <!--插入的动态sql 对空值进行处理 key-->
@@ -132,25 +132,25 @@
                 `id` = #{id},
             </if>
             <if test="targetScore!=0">
-                AND  `target_score` = #{targetScore},
+                AND  `target_score` = #{targetScore}
             </if>
             <if test="currentScore!=0">
-                AND `current_score` = #{currentScore},
+                AND `current_score` = #{currentScore}
             </if>
             <if test="schoolEvent!=null">
-                AND `schoolevent` LIKE #{schoolEvent},
+                AND `schoolevent` LIKE #{schoolEvent}
             </if>
             <if test="currentEnrol!=null">
-                AND `curent_enrol` LIKE #{currentEnrol},
+                AND `curent_enrol` LIKE #{currentEnrol}
             </if>
             <if test="schoolEvaluation!=null">
-                AND `school_evaluation` LIKE #{schoolEvaluation},
+                AND `school_evaluation` LIKE #{schoolEvaluation}
             </if>
             <if test="dangerValid!=null">
-                AND `danger_valid` LIKE #{dangerValid},
+                AND `danger_valid` LIKE #{dangerValid}
             </if>
             <if test="teacherId!=0">
-                AND `teacher_id` =  #{teacherId},
+                AND `teacher_id` =  #{teacherId}
             </if>
         </trim>
     </select>

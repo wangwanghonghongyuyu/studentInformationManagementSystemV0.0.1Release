@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.edu.smsys.dao.mapper.StudentEntityMapper">
     <!--结果集映射 学生实体类-->
-    <resultMap id="studnet" type="StudentEntity">
+    <resultMap id="student" type="StudentEntity">
         <id property="id" column="id"/>
         <result property="censusId" column="census_id"></result>
         <result property="telephone" column="telephone"></result>
@@ -21,7 +21,7 @@
         limit #{pageEntity.offsetPara,jdbcType=INTEGER} ,#{pageEntity.limitPara,jdbcType=INTEGER}
     </sql>
 
-    <sql id="studnet_columns">
+    <sql id="student_columns">
         `id`,
         `census_id`,
         `telephone`,
@@ -30,10 +30,10 @@
         `age`,
         `valid`,
         `class_id`,
-        `enrol_id`,
+        `enrol_id`
     </sql>
 
-    <sql id="studnet_property">
+    <sql id="student_property">
         /*在数据插入的时候对学籍id进行非空判断如果为空的那就给一个默认值0*/
         <choose>
             <when test="censusId==0||censusId==''">
@@ -118,8 +118,8 @@
         </trim>
     </sql>
 
-    <select id="queryAllStudent" resultMap="studnet">
-        SELECT <include refid="studnet_columns" /> FROM t_sys_student;
+    <select id="queryAllStudent" resultMap="student">
+        SELECT <include refid="student_columns" /> FROM t_sys_student;
     </select>
     <!--学生个数统计-->
     <select id="selectCount" resultType="int">
@@ -130,7 +130,7 @@
     <!--trim 动态查询 如果因为AND 不能直接在where后面-->
     <select id="queryStudentByStudent" parameterType="studentEntity" resultMap="student">
         SELECT
-        <include refid="studnet_columns"/>
+        <include refid="student_columns"/>
         FROM t_sys_student
         <trim prefix="WHERE" prefixOverrides="AND">
 

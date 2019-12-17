@@ -31,7 +31,7 @@ public class CensusService implements BaseService<CensusEntity> {
      */
     @Override
     public CensusEntity findEntityById(int id) {
-        return censusEntityMapper.queryClassById(id);
+        return censusEntityMapper.queryCensusById(id);
     }
 
     /**

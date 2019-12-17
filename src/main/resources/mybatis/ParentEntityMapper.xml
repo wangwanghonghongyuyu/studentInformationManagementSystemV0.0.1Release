@@ -17,12 +17,12 @@
     </resultMap>
 
     <sql id="parent_columns">
-         `id`,
+        `id`,
         `parent_name`,
         `type`,
         `telephone`,
         `work_area`,
-        `age`,
+        `age`
     </sql>
 
     <!--插入的动态sql 对空值进行处理 key-->
@@ -73,6 +73,13 @@
         </trim>
     </sql>
 
+    <sql id="like_left">
+        concat('%',
+    </sql>
+
+    <sql id="like_right">
+        ,'%')
+    </sql>
     <!--家长个数统计-->
     <select id="selectCount" resultType="int">
         select COUNT(*) AS counts FROM t_sys_parent ;
@@ -101,22 +108,22 @@
         <trim prefix="WHERE" prefixOverrides="AND">
 
             <if test="id!=0 ">
-                #{id},
+                #{id}
             </if>
             <if test="parentName!=null and parentName!=''">
-                AND `parent_name` LIKE #{parentName},
+                AND `parent_name` LIKE <include refid="like_left"/>#{parentName} <include refid="like_right"/>
             </if>
             <if test="type!=0">
-                AND `type`=#{type},
+                AND `type`=#{type}
             </if>
             <if test="telephone!=null and telephone!=''">
-                AND `telephone`=#{telephone},
+                AND `telephone`=#{telephone}
             </if>
             <if test="workArea!=null">
-                AND `work_area`=#{workArea},
+                AND `work_area`=#{workArea}
             </if>
             <if test="age!=0">
-                AND `age`=#{age},
+                AND `age`=#{age}
             </if>
         </trim>
     </select>

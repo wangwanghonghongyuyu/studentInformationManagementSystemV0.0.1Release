@@ -20,7 +20,7 @@ public interface CensusEntityMapper {
      * @param id
      * @return
      */
-    public CensusEntity queryClassById(@Param("id") int id);
+    public CensusEntity queryCensusById(@Param("id") int id);
 
     /**
      * 查询学籍根据学籍实体
