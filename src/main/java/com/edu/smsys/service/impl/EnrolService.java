@@ -1,7 +1,9 @@
 package com.edu.smsys.service.impl;
 
 import com.edu.smsys.dao.entity.EnrolEntity;
+import com.edu.smsys.dao.mapper.EnrolEntityMapper;
 import com.edu.smsys.service.BaseService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,13 +14,15 @@ import java.util.List;
  */
 @Service
 public class EnrolService implements BaseService<EnrolEntity> {
+    @Autowired
+    private EnrolEntityMapper enrolEntityMapper;
     /**
      * 查询所有年级
      * @return
      */
     @Override
     public List<EnrolEntity> findAll() {
-        return null;
+        return enrolEntityMapper.queryEnrols();
     }
 
     /**
@@ -28,7 +32,7 @@ public class EnrolService implements BaseService<EnrolEntity> {
      */
     @Override
     public EnrolEntity findEntityById(int id) {
-        return null;
+        return enrolEntityMapper.queryEnrolById(id);
     }
 
     /**
@@ -38,7 +42,7 @@ public class EnrolService implements BaseService<EnrolEntity> {
      */
     @Override
     public List<EnrolEntity> findEntity(EnrolEntity entity) {
-        return null;
+        return enrolEntityMapper.queryEnrolByEnrol(entity);
     }
 
     /**
@@ -48,7 +52,7 @@ public class EnrolService implements BaseService<EnrolEntity> {
      */
     @Override
     public int updateEntity(EnrolEntity entity) {
-        return 0;
+        return enrolEntityMapper.updateEnrolById(entity);
     }
 
     /**
@@ -58,7 +62,7 @@ public class EnrolService implements BaseService<EnrolEntity> {
      */
     @Override
     public int addEntity(EnrolEntity entity) {
-        return 0;
+        return enrolEntityMapper.insertEnrol(entity);
     }
 
     /**
@@ -68,6 +72,6 @@ public class EnrolService implements BaseService<EnrolEntity> {
      */
     @Override
     public int deleteEntity(int id) {
-        return 0;
+        return enrolEntityMapper.deleteEnrolById(id);
     }
 }

@@ -23,7 +23,7 @@
                             <sapn class="count-number-title">教师统计</sapn>
                             <span  class="count-number">
                                 <c:choose>
-                                    <c:when test=" ${count.teacherCount !=0}">
+                                    <c:when test="${count.teacherCount !=0}">
                                         ${count.teacherCount}人
                                     </c:when>
                                     <c:otherwise>

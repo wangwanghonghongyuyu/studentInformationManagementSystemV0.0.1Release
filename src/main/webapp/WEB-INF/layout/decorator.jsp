@@ -108,9 +108,20 @@
                         <p>Cras dictum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aenean lacinia mauris vel est. </p><p>Suspendisse eu nisl. Nullam ut libero. Integer dignissim consequat lectus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. </p>
                     </div>
                     <h3><span class="iconfont icon-banjiguanli"> </span>班级管理</h3>
-                        <div>
-                        <p>Cras dictum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aenean lacinia mauris vel est. </p><p>Suspendisse eu nisl. Nullam ut libero. Integer dignissim consequat lectus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. </p>
-                        </div>
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                                <a href="/enrol/add-enrol">添加年级</a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="/enrol/enrols">查询年级</a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="">添加班级</a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="">查询班级</a>
+                            </li>
+                        </ul>
                     <h3><span class="iconfont icon-yonghuguanli"> </span>用户管理</h3>
                     <div>
                     <p>Cras dictum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aenean lacinia mauris vel est. </p><p>Suspendisse eu nisl. Nullam ut libero. Integer dignissim consequat lectus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. </p>

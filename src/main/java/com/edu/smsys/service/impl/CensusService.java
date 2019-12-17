@@ -4,6 +4,7 @@ import com.edu.smsys.dao.entity.CensusEntity;
 import com.edu.smsys.dao.mapper.CensusEntityMapper;
 import com.edu.smsys.service.BaseService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -11,6 +12,7 @@ import java.util.List;
  * 学籍管理逻辑类
  * 2019年12月16日
  */
+@Service
 public class CensusService implements BaseService<CensusEntity> {
     @Autowired
     private CensusEntityMapper censusEntityMapper;

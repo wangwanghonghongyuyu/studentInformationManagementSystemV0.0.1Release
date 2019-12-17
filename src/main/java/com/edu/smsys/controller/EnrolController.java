@@ -5,6 +5,7 @@ import com.edu.smsys.service.impl.EnrolService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
@@ -31,6 +32,23 @@ public class EnrolController extends  BaseController{
         model.addAttribute("entities",entities);
         //定义到哪个视图中
         return VIEW_CONTENT+"enrols";
+    }
+
+    /**
+     * 删除年级
+     * @param id 要删除的id
+     * @return
+     */
+    @RequestMapping("/delete/{id}")
+    public String deleteEnrol(@PathVariable("id") int id){
+        enrolService.deleteEntity(id);//删除操作
+        return "redirect:/enrol/enrols";//转发到查询所有年级信息页面
+    }
+
+    @RequestMapping("/update")
+    public String updateEnrol(EnrolEntity enrolEntity){
+        enrolEntity.toString();
+        return "redirect:/enrol/enrols";//转发到查询所有年级信息页面
     }
 
 }
