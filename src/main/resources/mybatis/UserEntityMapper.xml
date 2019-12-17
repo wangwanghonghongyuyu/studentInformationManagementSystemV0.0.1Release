@@ -68,7 +68,7 @@
     <insert id="insertUser" parameterType="userEntity" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO `t_sys_user` (<include refid="noid_user_columns"/>) VALUES (<include refid="user_property"/>)
     </insert>
-
+    <!--修改用户信息-->
     <update id="updateUserById" parameterType="userEntity">
         UPDATE `t_sys_user`
         SET `user_code`=#{userCode},
